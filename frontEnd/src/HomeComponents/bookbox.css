@@ -1,0 +1,116 @@
+.bookBox {
+    width: 450px;
+    height: 270px;
+    background: rgb(153, 216, 255);
+    background: linear-gradient(193deg, rgba(153, 216, 255, 1) 39%, rgba(0, 212, 255, 0.9839286056219363) 100%);
+    margin: 20px 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    box-sizing: border-box;
+    column-gap: 20px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.bookCover {
+    width: 150px;
+    height: 220px;
+    background-size: cover;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 5px rgba(15, 15, 15, 0.432);
+}
+
+.star {
+    height: 20px;
+}
+
+.starRatting {
+    display: flex;
+    align-items: center;
+}
+
+
+/* .starRatting {
+    margin: 3px 0;
+} */
+
+.priceShow {
+    background-color: black;
+    color: white;
+    padding: 5px 15px;
+    border-bottom-left-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    width: fit-content;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+.bookTitle {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.author {
+    font-size: 14px;
+}
+
+.bookInfo {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    padding-top: 20px;
+}
+
+.actionBtns {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    column-gap: 10px;
+    margin-top: 10px;
+}
+
+.buyBtn,
+.addToCartBtn {
+    /* padding: 10px 15px; */
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    background: rgb(19, 44, 60);
+    background: linear-gradient(194deg, rgba(19, 44, 60, 1) 39%, rgba(0, 48, 143, 1) 100%);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    box-sizing: border-box;
+    transition: ease-out 0.4s;
+    -webkit-transition: ease-out 0.4s;
+    -moz-transition: ease-out 0.4s;
+    box-shadow: inset 0 0 0 0 #DB5753;
+}
+
+.buyBtn {
+    padding-right: 20px;
+}
+
+.buyBtn:hover,
+.addToCartBtn:hover {
+    box-shadow: inset 400px 0 0 0 #DB5753;
+}
+
+.addToCartBtnIcon,
+.buyNowIcon {
+    width: 30px;
+    margin-right: 10px;
+}

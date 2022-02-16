@@ -1,0 +1,91 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    position: sticky;
+    top: 0;
+    padding: 7px;
+    background-color: #F6F6F6;
+    border-bottom: #7e7e7e solid 1px;
+    z-index: 2;
+}
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#searchBar {
+    border: none;
+    font-size: 14px;
+    width: 100%;
+    background-color: transparent;
+}
+
+#searchBar::placeholder {
+    color: #020202;
+}
+
+#searchBar:focus {
+    outline: none;
+}
+
+#headerSearchIcon {
+    height: 22px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#userLogo {
+    width: 35px;
+    border-radius: 50%;
+    height: 35px;
+    background-size: cover;
+    /* box-shadow: inset #c9c0c0 0 0 5px 5px; */
+}
+
+.headerMenu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 20px;
+}
+
+.headerCart {
+    display: flex;
+    column-gap: 7px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bolder;
+    background: rgb(19, 44, 60);
+    background: linear-gradient(194deg, rgba(19, 44, 60, 1) 39%, rgba(0, 48, 143, 1) 100%);
+    padding: 7px 15px;
+    border-radius: 5px;
+    align-items: center;
+    color: white;
+}
+
+.headerCardIcon {
+    position: relative;
+}
+
+.headerCardIcon::after {
+    content: " ";
+    border-radius: 50%;
+    background-color: #0078D4;
+    position: absolute;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    top: -5px;
+    font-size: 10px;
+    padding: 2px;
+    color: white
+}
+
+.headerProfile {
+    cursor: pointer;
+}

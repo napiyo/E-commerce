@@ -1,0 +1,21 @@
+.SingleCategoryMain {
+    display: flex;
+    padding: 20px;
+    width: 200px;
+    height: 100px;
+    background-color: rgb(219, 87, 83);
+    border-radius: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    column-gap: 20px;
+}
+
+.categoryName {
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.categoryLogo {
+    height: 60px;
+}

@@ -1,0 +1,16 @@
+.AllProductsContainer {
+    display: flex;
+    flex-direction: row;
+    column-gap: 50px;
+    flex-wrap: nowrap;
+    padding: 20px;
+}
+
+.AllproductsList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sideBarForAllProducts {
+    width: 600px;
+}

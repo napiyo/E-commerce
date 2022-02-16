@@ -1,0 +1,32 @@
+.bookforsliderBox {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+    width: 200px;
+    justify-content: flex-start;
+    border-radius: 5px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.bookforsliderBox:hover {
+    box-shadow: rgba(0, 0, 0, 0.37) 0 0 20px 2px;
+}
+
+.bookCoverforSlider {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.bookTitleForSlider {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.priceForbookSlider {
+    font-size: 20px;
+    font-weight: bold;
+}

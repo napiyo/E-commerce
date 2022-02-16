@@ -1,0 +1,19 @@
+.heading {
+    margin: 20px 40px;
+}
+
+.trendingSlider {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    cursor: grab;
+    position: relative;
+}
+
+
+/* .trendingSlider::-webkit-scrollbar {
+    display: none;
+} */

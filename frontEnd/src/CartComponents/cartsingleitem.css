@@ -1,0 +1,58 @@
+.CartSingleItemContainer {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+    border: 1px solid rgba(24, 24, 24, 0.336);
+    padding: 10px 20px;
+    border-radius: 3px;
+    max-width: 800px;
+    width: 60vw;
+    position: relative;
+}
+
+.CartSingleItemDetailsContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    flex: 1;
+}
+
+.cartSingleCartPriceAndQuantityContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.CartSingleItemQuantityBox {
+    display: flex;
+    column-gap: 15px;
+}
+
+.TitleItemCartSingleItem {
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.imageCartSingleItem {
+    height: 120px;
+    width: 90px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.cartItemDeleteBtn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.cartSingleItemQuantityIncrease,
+.cartSingleItemQuantityDecrease {
+    cursor: pointer;
+}
+
+.CartSingleItemCurrentQuantity {
+    font-size: 20px;
+    font-weight: 500;
+}

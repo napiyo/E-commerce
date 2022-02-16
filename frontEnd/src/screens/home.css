@@ -1,0 +1,23 @@
+.welcomeBottom {
+    display: flex;
+    width: 100%;
+}
+
+.topauthorsSection {
+    width: 30%;
+    background-color: #E0E0E0;
+    border-bottom-left-radius: 20px;
+}
+
+.catagoriesSection {
+    width: 70%;
+    padding-left: 50px;
+}
+
+.slider {
+    display: flex;
+    flex-wrap: nowrap;
+    column-gap: 10px;
+    overflow-x: auto;
+    padding: 10px 30px;
+}

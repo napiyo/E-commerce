@@ -1,0 +1,10 @@
+.categoriesWelcomePage {
+    display: flex;
+    column-gap: 20px;
+    /* flex-wrap: wrap; */
+    row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 0 30px;
+    padding-bottom: 20px;
+}
