@@ -17,9 +17,9 @@ const connectDatabase = require('./config/database.js');
 dotenv.config({path:'./config/config.env'})
 
 connectDatabase();
-
-const server = app.listen(process.env.PORT,()=>{
-    console.log(`server running ${process.env.PORT}`);
+const PORT = process.env.PORT || 4100;
+const server = app.listen(PORT,()=>{
+    console.log(`server running on ${process.env.endPoint}:${PORT}`);
 })
  // unhandled promise Rejection
  process.on("unhandledRejection",(err) =>{
