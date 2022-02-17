@@ -134,7 +134,7 @@ exports.resetpassword = catchAsyncError(async (req,res,next)=>{
                 }
             })
                 // if token is expired
-                console.log(user);
+             
                 if(!user){
                     return next(new ErrorHandler("token is invalid or expired",403));
                 }
@@ -160,11 +160,111 @@ exports.resetpassword = catchAsyncError(async (req,res,next)=>{
 
 
 })
-// get all user
+
+// update password -- when user doesnt forgot password just he wants to update
+exports.updatePassword = catchAsyncError(async (req,res,next) =>{
+
+    // get user
+    const user = await userModel.findById(req.user.id).select("+password");
+    // comapre old password
+    const oldPasswordMatched = await user.comparePassword(req.body.oldPassword);
+    if(!oldPasswordMatched){
+        return next(new ErrorHandler("old password is incorrect",400));
+    }
+    if(req.body.newPassword !== req.body.confirmPassword){
+        return next(new ErrorHandler("new password and confirm password does not match",400));
+
+    }
+
+    user.password = req.body.newPassword;
+    await user.save();
+    sendToken(user,200,res);
+
+})
+
+// update current user details
+exports.updateProfile = catchAsyncError(async(req,res,next)=>{
+
+
+    const detailsTobeUpdated = {
+        email:req.body.email,
+        name:req.body.name,
+    }
+    const user = await userModel.findByIdAndUpdate(req.user.id,detailsTobeUpdated,{
+        new:true,
+        runValidators:true,
+        useFindAndModity:false
+        
+    });
+    res.status(200).json({
+        success:true,
+        user
+    })
+})
+
+
+// get current user details -self
+exports.getUserDetails = catchAsyncError(async(req,res,next)=>{
+    const user = await userModel.findById(req.user.id);
+    res.status(200).json({
+        success:true,
+        user
+    })
+})
+
+// get user details - Admin only
+exports.userDetails = catchAsyncError(async(req,res,next)=>{
+    const user = await userModel.findById(req.params.id);
+    if(!user){
+            next(new ErrorHandler(`no user found- invalid id ${req.params.id}`))
+    }
+    res.status(200).json({
+        success:true,
+        user
+    })
+})
+
+// get all user -admin only
 exports.getUsers = catchAsyncError(async(req,res,next)=>{
     const Users = await userModel.find();
     res.status(200).json({
         success:true,
         Users
+    })
+})
+
+// update user Role -- admin
+exports.updateUserRole = catchAsyncError(async(req,res,next)=>{
+
+
+    const detailsTobeUpdated = {
+        role:req.body.role,
+    }
+    const user = await userModel.findByIdAndUpdate(req.params.id,detailsTobeUpdated,{
+        new:true,
+        runValidators:true,
+        useFindAndModity:false
+        
+    });
+    if(!user){
+        return next(new ErrorHandler("user not found",404));
+    }
+    res.status(200).json({
+        success:true,
+        message:`role has been changed to ${req.body.role} for the user`
+    })
+})
+// delete user
+exports.deleteUser = catchAsyncError(async(req,res,next)=>{
+
+     const user = await userModel.findById(req.params.id);
+
+    if(!user){
+        return next(new ErrorHandler("user not found",404));
+    }
+    user.remove();
+    res.status(200).json({
+        success:true,
+        message:"user deleted"
     })
 })

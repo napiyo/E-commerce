@@ -20,8 +20,8 @@ if(err.name === "jsonWebTokenError"){
     err = new ErrorHandler(`JWT token is invalid, login again`,400)
 }
 //if jwtToken is expired
-if(err.name === "tokenExpiredError"){
-    err = new ErrorHandler(`JWT token is expired, login again`,400)
+if(err.name === "tokenExpireError"){
+    err = new ErrorHandler(`JWT token is Expired, login again`,400)
 }
 
 
