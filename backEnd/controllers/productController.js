@@ -24,6 +24,7 @@ exports.getAllProducts = catchAsyncError(async(req,res)=>{
 // Create Products - Admin Only
 
  exports.createProduct = catchAsyncError(async(req,res,next) =>{
+                req.body.createdBy = req.user.id;
                 const createdProduct = await productModel.create(req.body);
                 res.status(201).json({
                     sucess:true,

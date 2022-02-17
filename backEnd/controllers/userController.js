@@ -27,18 +27,35 @@ exports.loginUser = catchAsyncError(async(req,res,next)=>{
             return next(new ErrorHandler("Email or password invalid",401));
         }
      
-// check password
-  const passwordMatched = await user.comparePassword(password);
- if(!passwordMatched){
-    return next(new ErrorHandler("Email or password invalid",401));
- }
+    // check password
+    const passwordMatched = await user.comparePassword(password);
+     if(!passwordMatched){
+         return next(new ErrorHandler("Email or password invalid",401));
+         }
 
-// password matched
-sendToken(user,200,res);
+    // password matched
+        sendToken(user,200,res);
 });
 
 
-
+// logOut user
+exports.logout = catchAsyncError(async(req,res,next)=>{
+          
+    const {token} = req.cookies;
+    console.log(token);
+    if(!token){
+        return next(new ErrorHandler("no user logged in to log out",401));
+    }
+    
+    res.cookie("token",null,{
+                expires:new Date(Date.now()),
+                httpOnly:true
+            })
+            res.status(200).json({
+                success:true,
+                message:"logged out successfully"
+            })
+})
 
 
 // get all user
