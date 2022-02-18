@@ -77,3 +77,93 @@ exports.getSingleProduct = catchAsyncError(async(req,res)=>{
     res.status(200).json(product);
 
     });
+
+    // Add review to the product
+    exports.addReview = catchAsyncError(async(req,res,next)=>{
+        
+        // find product
+        const product = await productModel.findById(req.params.id);
+        if(!product){
+            return next(new ErrorHandler("product not found",404));
+        }
+        const ratting =  Number(req.body.ratting);
+        const comment = req.body.comment;
+        // already reviewed ?? then update else add
+        const isReviewed = product.reviews.find((review) => review.userId.toString() === req.user._id.toString() );
+        
+        let totalRatting=Number(product.numOfReviews) * Number(product.avgRatings);
+        
+        if(isReviewed){
+                product.reviews.forEach((review)=>{
+                    if(review.userId.toString() == req.user._id.toString()){
+                        totalRatting=totalRatting-  (review.ratting || 0);
+                        review.ratting=ratting;
+                        review.comment =comment;
+                    }
+                })
+        }
+        else{
+            product.reviews.push({ 
+                userId:req.user._id,
+                name:req.user.name,
+                ratting,
+                comment
+            })
+            
+        }
+       
+        // avg ratting
+        
+        totalRatting+=ratting;
+        totalRatting/=product.reviews.length;
+        
+        
+        product.numOfReviews=product.reviews.length;
+        // with only one decimal
+        product.avgRatings = Math.round(totalRatting * 10 ) / 10;
+       
+       
+        await product.save({validateBeforeSave:false})
+
+
+        res.status(200).json({
+            success:true,
+            message:"review added to the product"
+        })
+    })
+
+    
+// delete a review
+exports.deleteReview = catchAsyncError(async(req,res,next)=>{
+      
+        // find product
+        const product = await productModel.findById(req.params.id);
+        if(!product){
+            return next(new ErrorHandler("product not found",404));
+        }
+      
+        const reviewUserId = req.body.reviewUserId;
+        // remove review
+        const reviewToDelete = product.reviews.find((review) => review.userId.toString() === reviewUserId.toString() );
+  if(reviewToDelete){
+    // update avg ratting
+    let totalRatting=Number(product.numOfReviews) * Number(product.avgRatings);  
+    totalRatting -= reviewToDelete.ratting;
+    const updatedReviews = product.reviews.filter((review) => review.userId.toString() !== reviewUserId.toString() );
+    totalRatting= (updatedReviews.length==0)?0:totalRatting/ updatedReviews.length;
+    
+
+    product.reviews = updatedReviews;
+    product.avgRatings = totalRatting;
+    product.numOfReviews = updatedReviews.length;
+    await product.save({validateBeforeSave:false})
+  }
+  else{
+      return next(new ErrorHandler("review not found",404));
+  }
+  res.status(200).json({
+      success:true,
+      message:"review deleted"
+  })
+            
+})
