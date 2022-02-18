@@ -16,7 +16,7 @@ const productSchema = new mongoose.Schema({
             required:[true,"product price is required "],
             maxLength:[8,"price cannot exceed 8 digit length"]
     },
-    rating:{
+    avgRatings:{
         type:Number,
         default:0
     },
@@ -40,11 +40,19 @@ const productSchema = new mongoose.Schema({
         maxLength:[4,"max stock is 9999"],
         default:1
     },
+    unitSold:{
+        type:Number,
+        default:0
+    },
     numOfReviews:{
         type:Number,
         default:0
     },
     reviews:[{
+        userId:{
+            type:String,
+            required:true,
+        },
         name:{
             type:String,
             required:true,
