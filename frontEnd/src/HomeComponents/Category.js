@@ -1,10 +1,14 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './category.css'
-export default function Category() {
+export default function Category({category,active}) {
+   
   return (
-    <div className='SingleCategoryMain'>
-      <div className="categoryLogo"><img src="https://img.icons8.com/ios/50/000000/robot-3.png"/></div>
-      <div className='categoryName'> science fiction</div>
+    <Link to={`/products/${category}`} >
+          <div className={`SingleCategoryMain ${(active==category)?"activeCategory":""}`}>
+      <div ><img className="categoryLogo" src="https://img.icons8.com/ios/50/000000/robot-3.png"/></div>
+      <div className='categoryName'> {category}</div>
     </div>
+    </Link>
   )
 }

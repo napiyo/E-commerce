@@ -1,0 +1,7 @@
+.slider {
+    display: flex;
+    flex-wrap: nowrap;
+    column-gap: 10px;
+    overflow-x: auto;
+    padding: 10px 30px;
+}

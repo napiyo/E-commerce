@@ -18,8 +18,8 @@ ReactDOM.render(
   <Header/>
   <Routes>
     <Route path="/" element={<Home />} />
-    <Route path="/product" element={<Product />} />
-    <Route path="/products" element={<AllProducts />} />
+    <Route path="/product/:id" element={<Product />} />
+    <Route path="/products/:category" element={<AllProducts />} />
     <Route path="/cart" element={<Cart />} />
     <Route path="/profile" element={<Profile />} />
     <Route path="/admin" element={<AdminPanel />} />

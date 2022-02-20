@@ -20,7 +20,7 @@ export default function Header() {
           </div>
         </Link>
         <div className="headerMenu">
-          {/* <div style={{backgroundImage:`url(${userLogo})`}} id="userLogo"></div> */}
+          <div style={{backgroundImage:`url(${userLogo})`}} id="userLogo"></div>
           <Link to="/profile">
             {" "}
             <div className="headerProfile">

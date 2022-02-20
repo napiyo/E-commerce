@@ -7,6 +7,10 @@ const productSchema = new mongoose.Schema({
         required:[true,"Product Name is required"],
         trim:true
     },
+    author:{
+        type:String,
+        required:[true,"Product author is required"]
+    },
     description:{
         type:String,
         required:[true,"Product discription is required"]

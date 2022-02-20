@@ -1,10 +1,14 @@
     .authorList {
-        margin-right: 40px;
-        margin-left: 20px;
+        /* margin-right: 40px; */
+        /* margin-left: 20px; */
         height: auto;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         row-gap: 20px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 2rem;
         /* overflow-y: scroll; */
     }

@@ -1,6 +1,8 @@
 .welcomeBottom {
     display: flex;
     width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .topauthorsSection {
@@ -10,14 +12,22 @@
 }
 
 .catagoriesSection {
-    width: 70%;
+    /* width: 70%; */
     padding-left: 50px;
+    max-width: 66%;
 }
 
-.slider {
-    display: flex;
-    flex-wrap: nowrap;
-    column-gap: 10px;
-    overflow-x: auto;
-    padding: 10px 30px;
+@media only screen and (max-width: 600px) {
+    .catagoriesSection {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    .welcomeBottom {
+        flex-wrap: wrap-reverse;
+    }
+    .topauthorsSection {
+        width: 100%;
+    }
 }

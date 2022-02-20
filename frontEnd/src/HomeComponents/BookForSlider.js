@@ -1,13 +1,21 @@
 import './bookforslider.css'
-import React from 'react'
+import React, { useEffect } from 'react'
 import bookCover from '../assests/bookCover.jpg'
-export default function BookForSlider() {
+import { Link } from 'react-router-dom'
+import Aos from "aos"
+import 'aos/dist/aos.css'; 
+export default function BookForSlider({product}) {
+  useEffect(() => {
+    Aos.init({duration:1000})
+  }, [])
+  
   return (
-    <div className='bookforsliderBox'>
+    <Link to={`/product/${product._id}`}>
+    <div className='bookforsliderBox'  data-aos="flip-up">
         <img src={bookCover} alt="loading" className='bookCoverforSlider' />
-        <div className="bookTitleForSlider">The World of Abstract Art</div>
-        <div className="priceForbookSlider">500 ₹</div>
-        
+        <div className="bookTitleForSlider">{product.name}</div>
+        <div className="priceForbookSlider">{product.price} ₹</div>
     </div>
+    </Link>
   )
 }

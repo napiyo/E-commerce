@@ -1,6 +1,6 @@
 .SingleCategoryMain {
     display: flex;
-    padding: 20px;
+    padding: 10px 20px;
     width: 200px;
     height: 100px;
     background-color: rgb(219, 87, 83);
@@ -8,6 +8,9 @@
     box-sizing: border-box;
     cursor: pointer;
     column-gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
 }
 
 .categoryName {
@@ -17,5 +20,23 @@
 }
 
 .categoryLogo {
-    height: 60px;
+    height: 30px;
+}
+
+.activeCategory {
+    background-color: rgba(66, 55, 219, 0.534);
+}
+
+@media only screen and (max-width: 600px) {
+    .SingleCategoryMain {
+        width: 6rem;
+        height: 3rem;
+        padding: 0;
+    }
+    .categoryName {
+        font-size: 0.9rem;
+    }
+    .categoryLogo {
+        display: none;
+    }
 }

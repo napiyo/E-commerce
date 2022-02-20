@@ -8,6 +8,8 @@
     .authorSingle {
         display: flex;
         align-items: center;
+        /* background-color: red; */
+        max-width: 90%;
         justify-content: start;
         column-gap: 10px;
         /* margin: 15px; */

@@ -18,7 +18,15 @@ exports.getAllProducts = catchAsyncError(async(req,res)=>{
 
     });
 
+// get top selling product 
+exports.getTopSellingProducts = catchAsyncError(async(req,res)=>{
+    
+    const products = await productModel.find().sort({unitSold:-1}).limit(req.params.count || 3);
+    res.status(200).json({
+        sucess:true,
+        products});
 
+    });
 
 
 // Create Products - Admin Only
@@ -69,7 +77,7 @@ exports.DeleteProduct = catchAsyncError(async(req,res,next) =>{
 
 // get single product
 
-exports.getSingleProduct = catchAsyncError(async(req,res)=>{
+exports.getSingleProduct = catchAsyncError(async(req,res,next)=>{
     const product = await productModel.findById(req.params.id);
     if(!product){
         return next(new ErrorHandler("product Not Found",404));
@@ -78,8 +86,8 @@ exports.getSingleProduct = catchAsyncError(async(req,res)=>{
 
     });
 
-    // Add review to the product
-    exports.addReview = catchAsyncError(async(req,res,next)=>{
+// Add review to the product
+exports.addReview = catchAsyncError(async(req,res,next)=>{
         
         // find product
         const product = await productModel.findById(req.params.id);
@@ -167,3 +175,14 @@ exports.deleteReview = catchAsyncError(async(req,res,next)=>{
   })
             
 })
+
+// get categories
+exports.getAllCategories = catchAsyncError(async(req,res)=>{
+    
+    const categories = await productModel.distinct("category");
+    res.status(200).json({
+        sucess:true,
+        categories});
+
+    });
+

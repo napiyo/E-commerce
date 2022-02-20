@@ -12,5 +12,24 @@
 }
 
 .sideBarForAllProducts {
-    width: 600px;
+    width: 350px;
+}
+
+.pagination {
+    display: flex;
+    column-gap: 10px;
+    width: 100%;
+    justify-content: center;
+    list-style-type: none;
+}
+
+.paginationItem {
+    border: 1px black solid;
+    padding: 5px 10px;
+    background-color: aliceblue;
+    cursor: pointer;
+}
+
+.pageActive {
+    background-color: rgba(25, 189, 230, 0.671);
 }

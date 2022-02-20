@@ -1,7 +1,7 @@
 const express = require('Express');
 const errorMiddleware = require('./middleware/error')
 const cookieParser = require('cookie-parser');
-
+const cors = require('cors');
 const productRouter = require('./routes/productsRoutes.js');
 const userRouter = require('./routes/userRoutes.js');
 const orderRouter = require('./routes/orderRoutes.js');
@@ -10,6 +10,7 @@ const app = express();
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors());
 
 // import routes
 

@@ -1,5 +1,5 @@
 .heading {
-    margin: 20px 40px;
+    margin: 15px 40px;
 }
 
 .trendingSlider {
@@ -13,7 +13,29 @@
     position: relative;
 }
 
+.loaderContainer {
+    width: 100%;
+    height: 100%;
+    min-height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-/* .trendingSlider::-webkit-scrollbar {
-    display: none;
-} */
+.loader {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: solid 5px rgba(43, 116, 226, 0.712);
+    border-top: solid 5px rgb(0, 68, 255);
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(360deg);
+    }
+}
