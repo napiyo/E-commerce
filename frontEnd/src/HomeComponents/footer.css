@@ -1,9 +1,23 @@
 .footer {
-    background: rgb(19, 44, 60);
-    background: linear-gradient(194deg, rgba(19, 44, 60, 1) 39%, rgb(11, 63, 66) 100%);
-    height: 200px;
+    background: rgb(1, 101, 163);
+    background: linear-gradient(194deg, rgb(1, 13, 80) 39%, rgb(11, 63, 66) 100%);
+    min-height: 200px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     color: white;
+    flex-wrap: wrap;
+    padding: 2vmax;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.centerFooter {
+    font-size: 2em;
+    text-align: center;
+}
+
+.rightFooter {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
 }

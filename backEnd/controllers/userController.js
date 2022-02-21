@@ -26,7 +26,7 @@ exports.loginUser = catchAsyncError(async(req,res,next)=>{
     const user = await userModel.findOne({email}).select("+password");
     // if user not found
         if(!user){
-            return next(new ErrorHandler("Email or password invalid",401));
+            return next(new ErrorHandler("Email or password invalid",406));
         }
      
     // check password

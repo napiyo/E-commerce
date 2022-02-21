@@ -12,8 +12,9 @@ class ApiFeatures{
                 }
             }
             :{};
-        
+   
             this.query = this.query.find({...keyword});
+       
             return this;
     }
 
@@ -32,15 +33,15 @@ class ApiFeatures{
             price = JSON.stringify(price);
             price = price.replace(/\b(gt|lt|gte|lte)\b/g,key => `$${key}`);
             price=JSON.parse(price);
-        
-            this.query = this.query.find({price}); 
+            this.query = this.query.find({price,category}); 
         }
+        // }
         
         return this;
 
     }
     //pagition
-    pagition(resultPerPage){
+    pagination(resultPerPage){
        
         let currentPage = this.queryStr.page || 1;
         

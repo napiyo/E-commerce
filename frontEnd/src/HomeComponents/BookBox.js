@@ -2,6 +2,7 @@ import React from 'react'
 import './bookbox.css'
 import bookCover from '../assests/bookCover.jpg';
 import {Link, useNavigate} from 'react-router-dom';
+import { Rating } from '@mui/material';
 export default function BookBox({product}) {
 
   const navigate = useNavigate();
@@ -17,11 +18,9 @@ navigate('/product/'+product._id);
         <div className="author">{product.author}</div>
         <div style={{margin:'3px 0'}}>
         <div className="starRatting">
-      {
-        product.avgRatings  
-      }
-      <img className='star' alt="stars" src="https://img.icons8.com/ios-filled/50/000000/star--v1.png"/>
-      
+    
+      {/* <img className='star' alt="stars" src="https://img.icons8.com/ios-filled/50/000000/star--v1.png"/> */}
+      <Rating name="read-only" value={product.avgRatings}  precision={0.1} readOnly />
         <span style={{fontSize:'12px',marginLeft:'5px'}}>
             ({product.numOfReviews})
         </span>

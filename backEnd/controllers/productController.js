@@ -9,11 +9,17 @@ const ApiFeatures = require("../utils/apiFeatures");
 exports.getAllProducts = catchAsyncError(async(req,res)=>{
     const resultPerPage = 15;
     const productCount = await productModel.countDocuments();
-    const apifeatures = new ApiFeatures(productModel.find(),req.query).search().filter().pagition(resultPerPage);
-    const products = await apifeatures.query;
+    let apifeatures = new ApiFeatures(productModel.find(),req.query).search().filter();
+    let products = await apifeatures.query
+    let filteredProductCount=products.length;
+     apifeatures = new ApiFeatures(productModel.find(),req.query).search().filter().pagination(resultPerPage);
+  
+    products = await apifeatures.query;
     res.status(200).json({
         sucess:true,
+        resultPerPage,
         productCount,
+        filteredProductCount,
         products});
 
     });

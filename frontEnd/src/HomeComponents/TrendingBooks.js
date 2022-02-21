@@ -4,10 +4,11 @@ import Aos from "aos"
 import 'aos/dist/aos.css'; 
 import './trendingBooks.css'
 import api from '../config/axiosApi';
+import {Skeleton} from '@mui/material'
 export default function TrendingBooks() {
 
   // set loader animation
-  const [loading, setloading] = useState(true)
+  
   const [trendingProducts, settrendingProducts] = useState([])
 
 // make trending books scrollable with mouse drag
@@ -20,7 +21,7 @@ const sliderRef= useRef(null);
     
     api.get("/api/v1/products/topSellingProducts/7").then((res)=>{
       settrendingProducts(res.data.products);
-    setloading(false)
+
     const slider = sliderRef.current
     enableMouseDragSlider(slider)
   
@@ -59,22 +60,23 @@ slider.addEventListener('mouseup', stopDragging, false);
 slider.addEventListener('mouseleave', stopDragging, false);
 
 }
-if(loading){
-  return <>
-  <div className="loaderContainer">
-    <div className="loader">
 
-    </div>
-  </div>
-  </>
-}
-else{
+
   return (
     <div className='mainContainer'> 
 
         <h3 className='heading'>Trending Books</h3>
         <div className="trendingSlider" ref={sliderRef} data-aos="fade-left">
-         {
+         { (trendingProducts.length==0)?
+         <>
+         <Skeleton  height={'25em'} className='bookBox' style={{marginTop:'-60px',marginBottom:'-50px'}}/>
+         <Skeleton  height={'25em'} className='bookBox' style={{marginTop:'-60px',marginBottom:'-50px'}}/>
+         <Skeleton  height={'25em'} className='bookBox' style={{marginTop:'-60px',marginBottom:'-50px'}}/>
+        
+         
+         </>
+         
+         :
            trendingProducts.map((p)=>{
              return  <BookBox product={p} key={p._id}/>
            })
@@ -85,5 +87,5 @@ else{
         </div>
     </div>
   )
-}
+
 }

@@ -1,0 +1,15 @@
+.reviewComment {
+    font-size: medium;
+    font-weight: 400;
+}
+
+.singleReviewContainer {
+    display: flex;
+    justify-items: start;
+    flex-direction: column;
+    width: 90%;
+    padding: 1vmax 2vmax;
+    box-sizing: border-box;
+    background-color: aliceblue;
+    margin-bottom: 1vmax;
+}

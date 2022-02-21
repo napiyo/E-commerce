@@ -23,15 +23,15 @@ export default function Home() {
       console.log(e.message);
     })
   }, [])
-  if(loading){
-    return <>
-    <div className="loaderContainer">
-      <div className="loader">
+  // if(loading){
+  //   return <>
+  //   <div className="loaderContainer">
+  //     <div className="loader">
   
-      </div>
-    </div>
-    </>
-  }
+  //     </div>
+  //   </div>
+  //   </>
+  // }
   return (
     <div>
        

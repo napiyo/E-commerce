@@ -2,12 +2,13 @@
     display: flex;
     flex-direction: row;
     column-gap: 50px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     padding: 20px;
 }
 
 .AllproductsList {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -17,19 +18,27 @@
 
 .pagination {
     display: flex;
-    column-gap: 10px;
+    /* column-gap: 10px; */
     width: 100%;
     justify-content: center;
     list-style-type: none;
 }
 
 .paginationItem {
-    border: 1px black solid;
+    border: 2px rgb(97, 97, 97) solid;
     padding: 5px 10px;
-    background-color: aliceblue;
+    background-color: white;
     cursor: pointer;
+    border-left-width: 1px;
+    border-right-width: 1px;
 }
 
 .pageActive {
     background-color: rgba(25, 189, 230, 0.671);
+}
+
+@media only screen and (max-width: 600px) {
+    .AllproductsList {
+        justify-content: space-around;
+    }
 }

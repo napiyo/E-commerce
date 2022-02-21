@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import logo from "../assests/logo.png";
 import userLogo from "../assests/user.jpeg";
 import "./header.css";
+import {Badge} from '@mui/material'
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 export default function Header() {
   return (
     <>
@@ -22,9 +24,9 @@ export default function Header() {
         <div className="headerMenu">
           <div style={{backgroundImage:`url(${userLogo})`}} id="userLogo"></div>
           <Link to="/profile">
-            {" "}
+         
             <div className="headerProfile">
-              Narendra{" "}
+              Narendra
               <img
                 src="https://img.icons8.com/color/48/000000/sort-down.png"
                 width="10px"
@@ -34,11 +36,13 @@ export default function Header() {
           <Link to="/cart">
             <div className="headerCart">
               <div className="headerCardIcon">
-                {" "}
-                <img
+              <Badge badgeContent={4} color="primary">
+  <ShoppingBagIcon color="white" />
+</Badge>
+                {/* <img
                   width="25px"
                   src="https://img.icons8.com/fluency/48/000000/shopping-bag.png"
-                />
+                /> */}
               </div>
               Cart
             </div>

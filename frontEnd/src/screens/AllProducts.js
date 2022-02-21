@@ -15,7 +15,7 @@ const [currentPage, setcurrentPage] = useState(1);
  
 
     api.get(`/api/v1/products?category=${category}&page=${currentPage}`).then((res)=>{
-      settotalPages(res.data.productCount);
+      settotalPages(res.data.filteredProductCount/res.data.resultPerPage);
       setproducts(res.data.products);
    
     setloading(false)
@@ -51,7 +51,7 @@ const [currentPage, setcurrentPage] = useState(1);
         }
           </div>
         </div>
-
+{(totalPages < 2 )?"":
         <ReactPaginate
         breakLabel="..."
         nextLabel="next >"
@@ -65,7 +65,7 @@ const [currentPage, setcurrentPage] = useState(1);
         previousClassName='paginationItem'
         activeClassName='pageActive'
         // renderOnZeroPageCount={null}
-      />
+      />}
     </div>
   )
 }

@@ -29,7 +29,7 @@
 
 @media only screen and (max-width: 600px) {
     .SingleCategoryMain {
-        width: 6rem;
+        /* width: 6rem; */
         height: 3rem;
         padding: 0;
     }

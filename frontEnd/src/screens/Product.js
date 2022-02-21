@@ -2,15 +2,43 @@ import React, { useEffect, useState } from 'react'
 import bookCover from '../assests/bookCover.jpg'
 import './product.css';
 import { useParams } from "react-router-dom";
-
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Rating, Snackbar, TextField} from '@mui/material';
 
 import api from '../config/axiosApi';
+import Review from '../allproductsListComponents/review';
 
 export default function Product() {
   // useParams 
   const productId = useParams().id;
   const [loading, setloading] = useState(true)
   const [product, setproduct] = useState({});
+  const [reviewUpdated, setreviewUpdated] = useState(false)
+
+
+  // write user review
+  const [dialogOpen, setdialogOpen] = useState(false)
+ const [rattingByuser, setrattingByuser] = useState(0);
+ const [productReviewByUser, setproductReviewByUser] = useState("")
+
+ const handleDialog = ()=>{
+   setdialogOpen((dialogOpen)?false:true);
+ }
+// upload review
+const writeReview = ()=>{
+   const review = {
+     ratting:rattingByuser,
+     comment:productReviewByUser
+   }
+    api.post(`/api/v1/products/addReview/${productId}`,review,{ withCredentials: true }).then((res)=>{
+      console.log(res.data);
+      handleDialog();
+      setreviewUpdated(true)
+    }).catch((err)=>{
+      console.log(err.message);
+      
+    })
+}
+
   useEffect(() => {
       api.get(`/api/v1/products/${productId}`).then((res)=>{
         setproduct(res.data);
@@ -19,7 +47,7 @@ export default function Product() {
       }).catch((err)=>{
         console.log(err.message);
       })
-   }, [])
+   }, [reviewUpdated])
    
    if(loading){
     return <>
@@ -32,6 +60,7 @@ export default function Product() {
   }
   else{
   return (
+    <>
     <div className='singleProductContainer'>
         <div className="productImagesAndBtns">
                 <img src={bookCover} alt="Loading" className='ImageForSingleProduct' />
@@ -67,6 +96,53 @@ export default function Product() {
         <p>{product.description}</p>  </div>
   </div>
     </div>
+    <Divider />
+  <p style={{marginLeft:'4vmax'}} >your feedback is very valuable for us - write / update your review for this product &nbsp; <Button variant='contained' onClick={handleDialog}>
+    write/update review
+    </Button></p> 
+
+    <div className="writeReview">
+
+    <Dialog open={dialogOpen} onClose={handleDialog}>
+        <DialogTitle>write / update review</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+           Please share your feedBack about this product. your review is very important for us.
+          </DialogContentText>
+          <Divider style={{marginTop:'2vmax',marginBottom:'2vmax'}}/>
+          <Rating
+  name="simple-controlled"
+  value={rattingByuser}
+  onChange={(event, newValue) => {
+    setrattingByuser(newValue);
+    
+  }}
+  size='large'
+/>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="write your feedback"
+            type="text"
+            fullWidth
+            multiline
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDialog}>Cancel</Button>
+          <Button onClick={writeReview}>submit</Button>
+        </DialogActions>
+      </Dialog>
+      <Divider />
+      {
+        product.reviews.map((r)=>{
+          return <Review id={r.userId} review={r} />
+        })
+      }
+    </div>
+    </>
   )
 }
 }
