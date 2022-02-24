@@ -1,13 +1,24 @@
 import { Button, TextField } from "@mui/material";
 import "./auth.css";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import api from "../config/axiosApi";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { LoggedIn } from "../Redux/UserActions";
+
+
+// import second from ''
 
 export default function Auth() {
+  const [cookies, setcookies] = useCookies();
+  let navigate = useNavigate();
   const leftContainer = useRef(null);
   const rightContainer = useRef(null);
   const leftOverlay = useRef(null);
   const rightOverlay = useRef(null);
+
+const dispatch = useDispatch(state=>state.UserReducer);
 
   function slideLeft() {
     // leftContainer.current.style.transform='translate(100%)';
@@ -42,42 +53,61 @@ export default function Auth() {
   const [loginPassword, setloginPassword] = useState("");
   const [signupEmail, setsignupEmail] = useState("");
   const [signupPassword, setsignupPassword] = useState("");
-  const [loggedIn, setloggedIn] = useState(false);
+  const [userName, setuserName] = useState("")
+  const [isloggedIn, setisloggedIn] = useState(false);
+const [loading, setloading] = useState(true);
+const userState =useSelector((state) => state.UserReducer);
 
+
+  useEffect(() => {
+   if(userState.isauthenticated){
+     setisloggedIn(true);
+     navigate('/profile');
+    }
+    setloading(false)
+  }, [userState.isauthenticated])
+  
   const login = () => {
-    
-    
-    api
-      .post("/api/v2/users/login", {
+    api.post("/api/v2/users/login", {
         email: loginEmail,
         password: loginPassword
       },{headers:{'Content-Type':"application/json"}})
       .then((res) => {
         console.log(res.data);
-        setloggedIn(true);
+        dispatch(LoggedIn(res.data.user))
+        setisloggedIn(true);
+        
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
-  const logout = () => {
-    api
-      .post("/api/v2/users/logout")
-      .then((res) => {
-        console.log(res.data);
-        setloggedIn(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  if (loggedIn) {
+const signUp = ()=>{
+  const userData = {
+    email:signupEmail,
+    password:signupPassword,
+    name:userName
+  }
+  api.post('api/v2/users/newUserRegister',userData).then((res)=>{
+    dispatch(LoggedIn(res.data.user));
+
+  }).catch((err)=>{
+    console.log(err);
+  })
+}
+  if(loading){
+    return <>
+        <div className="loaderContainer">
+      <div className="loader">
+  
+      </div>
+    </div>
+    </>
+  }
+  if (isloggedIn) {
     return (
-      <div>
-        this is logged in
-        <Button onClick={logout} variant="contained">
-          logout
-        </Button>
+      <div style={{textAlign:'center',minHeight:'100vh',minWidth:'100vw'}}>
+        your already logged in..
       </div>
     );
   }
@@ -91,7 +121,7 @@ export default function Auth() {
               LOG IN
             </h1>
             <p style={{ textAlign: "center", marginBottom: "10px" }}>
-              get all movies details
+              E-commerce
             </p>
             <input
               type="email"
@@ -126,8 +156,16 @@ export default function Auth() {
               SIGN IN
             </h1>
             <p style={{ textAlign: "center", marginBottom: "10px" }}>
-              get all movies details
+              welcome to e-commerce
             </p>
+            <input
+              type="text"
+              placeholder="Name"
+              value={userName}
+              onChange={(e) => {
+                setuserName(e.target.value);
+              }}
+            ></input>
             <input
               type="email"
               placeholder="Email"
@@ -144,7 +182,7 @@ export default function Auth() {
                 setsignupPassword(e.target.value);
               }}
             ></input>
-            <button id="signupBtn">SIGN UP</button>
+            <button id="signupBtn" onClick={signUp}>SIGN UP</button>
           </div>
         </div>
         <div className="rightOverlay" ref={rightOverlay}>

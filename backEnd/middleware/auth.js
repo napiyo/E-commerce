@@ -17,6 +17,9 @@ exports.isAuthenticated = catchAsyncError(async(req,res,next)=>{
      // decode id from token
      const {id} = jwtoken.verify(token,process.env.JWT_SECRET); 
      const user = await userModel.findById(id);
+     if(!user){
+         return next(new ErrorHandler("invalid token , please login again",401));
+     }
      req.user = user;
      next()
 })

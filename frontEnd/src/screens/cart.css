@@ -18,6 +18,7 @@
     flex-direction: column;
     row-gap: 20px;
     border: 1px solid rgba(0, 0, 0, 0.384);
+    background-color: aliceblue;
     padding: 20px;
     border-radius: 5px;
     position: sticky;

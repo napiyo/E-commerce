@@ -2,18 +2,26 @@ import React, { useEffect, useState } from 'react'
 import bookCover from '../assests/bookCover.jpg'
 import './product.css';
 import { useParams } from "react-router-dom";
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Rating, Snackbar, TextField} from '@mui/material';
-
+import {Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Rating, Snackbar, TextField} from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { addToCartReduxAction } from '../Redux/cartActions';
 import api from '../config/axiosApi';
 import Review from '../allproductsListComponents/review';
+// import {queryString} from 'querystring'
+import {stringify} from 'query-string'
 
 export default function Product() {
   // useParams 
+  
   const productId = useParams().id;
   const [loading, setloading] = useState(true)
   const [product, setproduct] = useState({});
   const [reviewUpdated, setreviewUpdated] = useState(false)
-
+  
+  //alert
+  const [showAlert, setshowAlert] = useState(false);
+const [alertMsg, setalertMsg] = useState("");
+const [alertType, setalertType] = useState("");
 
   // write user review
   const [dialogOpen, setdialogOpen] = useState(false)
@@ -25,18 +33,34 @@ export default function Product() {
  }
 // upload review
 const writeReview = ()=>{
+  if(rattingByuser==0){ setrattingByuser(1)}
    const review = {
      ratting:rattingByuser,
      comment:productReviewByUser
    }
-    api.post(`/api/v1/products/addReview/${productId}`,review,{ withCredentials: true }).then((res)=>{
+    
+    api.post(`/api/v1/products/addReview/${productId}`,review).then((res)=>{
       console.log(res.data);
       handleDialog();
       setreviewUpdated(true)
+      setalertType("success");
+      setalertMsg("review submitted");
+      setshowAlert(true);
+      setTimeout(() => {
+        setshowAlert(false);
+      }, 4000);
+
     }).catch((err)=>{
       console.log(err.message);
+      setalertType("error");
+      setalertMsg(err.message);
+      setshowAlert(true);
+      setTimeout(() => {
+        setshowAlert(false);
+      }, 4000);
       
     })
+    setreviewUpdated(false);
 }
 
   useEffect(() => {
@@ -46,9 +70,23 @@ const writeReview = ()=>{
         setloading(false);
       }).catch((err)=>{
         console.log(err.message);
+       
+        
       })
    }, [reviewUpdated])
    
+
+   const dispatch = useDispatch() ;
+
+// add item to cart
+const addtoCart =()=>{
+   if(Object.keys(product).length === 0) return;
+   dispatch(addToCartReduxAction(product));
+}
+
+
+
+
    if(loading){
     return <>
     <div className="loaderContainer">
@@ -66,7 +104,7 @@ const writeReview = ()=>{
                 <img src={bookCover} alt="Loading" className='ImageForSingleProduct' />
                 <div className="btnsSignleProduct">
                 <button className='buyBtn' style={{padding:'10px 20px'}}><img className='buyNowIcon' src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-buy-ecommerce-kiranshastry-gradient-kiranshastry-1.png"/>Buy Now</button>
-              <button className='addToCartBtn' style={{padding:'10px 20px'}}> <img className='addToCartBtnIcon' src="https://img.icons8.com/external-icongeek26-flat-icongeek26/64/000000/external-cart-essentials-icongeek26-flat-icongeek26.png"/>Add to cart</button>
+              <button className='addToCartBtn' onClick={addtoCart} style={{padding:'10px 20px'}}> <img className='addToCartBtnIcon' src="https://img.icons8.com/external-icongeek26-flat-icongeek26/64/000000/external-cart-essentials-icongeek26-flat-icongeek26.png"/>Add to cart</button>
                     
                 </div>
         </div>
@@ -128,6 +166,7 @@ const writeReview = ()=>{
             fullWidth
             multiline
             variant="standard"
+            onChange={(e)=>setproductReviewByUser(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
@@ -142,6 +181,10 @@ const writeReview = ()=>{
         })
       }
     </div>
+    {(showAlert)?
+      <div className="alert"><Alert variant="filled" severity={alertType}>{alertMsg}</Alert></div>
+:""
+    }
     </>
   )
 }

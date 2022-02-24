@@ -14,7 +14,6 @@
     overflow: hidden;
     flex-shrink: 0;
     flex-shrink: 0;
-    cursor: pointer;
 }
 
 .bookCover {
@@ -23,6 +22,7 @@
     background-size: cover;
     border-radius: 5px;
     box-shadow: 0 0 15px 5px rgba(15, 15, 15, 0.432);
+    cursor: pointer;
 }
 
 .star {
@@ -104,6 +104,7 @@ button {
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
     box-shadow: inset 0 0 0 0 #DB5753;
+    z-index: 3;
 }
 
 .buyBtn {

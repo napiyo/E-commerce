@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './bookbox.css'
 import bookCover from '../assests/bookCover.jpg';
 import {Link, useNavigate} from 'react-router-dom';
 import { Rating } from '@mui/material';
+import {useDispatch} from 'react-redux'
+import {addToCartReduxAction} from '../Redux/cartActions'
 export default function BookBox({product}) {
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  // const [addedToCart, setaddedToCart] = useState(false)
   const toProduct=()=>{
 navigate('/product/'+product._id);
   }
   return (
- <div className='bookBox' onClick={toProduct}>
-    <div className="bookCover" style={{backgroundImage:`url(${bookCover})`}}></div>
+ <div className='bookBox' >
+    <div className="bookCover" onClick={toProduct}  style={{backgroundImage:`url(${bookCover})`}}></div>
     <div className="bookInfo">
         <div className="bookTitle">{product.name}</div>
         <div className="author">{product.author}</div>
@@ -33,7 +36,9 @@ navigate('/product/'+product._id);
         <div className="actionBtns">
             <button className='buyBtn'><img className='buyNowIcon' src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-buy-ecommerce-kiranshastry-gradient-kiranshastry-1.png"
             alt="loading"/>Buy Now</button>
-            <button className='addToCartBtn'> <img className='addToCartBtnIcon' src="https://img.icons8.com/external-icongeek26-flat-icongeek26/64/000000/external-cart-essentials-icongeek26-flat-icongeek26.png"
+            <button className='addToCartBtn' onClick={()=>
+            dispatch(addToCartReduxAction(product))
+          }> <img className='addToCartBtnIcon' src="https://img.icons8.com/external-icongeek26-flat-icongeek26/64/000000/external-cart-essentials-icongeek26-flat-icongeek26.png"
             alt="loading"/>Add to cart</button>
             
         </div>

@@ -12,6 +12,7 @@
     overflow: hidden;
     width: 50vw;
     height: 60vh;
+    min-width: 600px;
     background-color: #FFFFFF;
     /* min-width: 300px; */
     border-radius: 7px;

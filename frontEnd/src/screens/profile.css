@@ -1,0 +1,63 @@
+.profileBody {
+    padding: 2vmax;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+    min-height: 100%;
+    column-gap: 4vmax;
+}
+
+.leftSectionProfile {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vmax;
+    width: 25%;
+}
+
+.leftSecionWelcome {
+    display: flex;
+    column-gap: 1vmax;
+    padding: 1vmax;
+    border-radius: 3px;
+    background-color: aquamarine;
+}
+
+.leftSectionbottom {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    row-gap: 1vmax;
+    text-align: center;
+    background-color: aquamarine;
+    padding: 1vmax;
+}
+
+.sectionTitleProfile {
+    font-weight: 500;
+    margin: 1vmax 0;
+}
+
+.rightSectionProfile {
+    width: 50%;
+}
+
+.leftSectionbottomItem {
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.leftSectionbottomItem:hover {
+    transform: translateX(-1vmax);
+    text-shadow: rgb(4, 6, 156) 1px 0 10px;
+}
+
+.currentSectionTitleProfile {
+    color: rgba(0, 0, 0, 0.473);
+    cursor: default;
+}
+
+.currentSectionTitleProfile:hover {
+    transform: none;
+    text-shadow: none;
+}

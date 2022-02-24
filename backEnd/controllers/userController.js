@@ -8,6 +8,9 @@ const crypto = require('crypto');
 //register new user
 exports.registerUser = catchAsyncError( async(req,res,next)=>{
     const newUser = await userModel.create(req.body);
+    if(!newUser){
+        return next(new ErrorHandler("sign up failed, please refresh page",500))
+    }
     sendToken(newUser,201,res);
   
 })
@@ -44,7 +47,7 @@ exports.loginUser = catchAsyncError(async(req,res,next)=>{
 exports.logout = catchAsyncError(async(req,res,next)=>{
           
     const {token} = req.cookies;
-    console.log(token);
+  
     if(!token){
         return next(new ErrorHandler("no user logged in to log out",401));
     }

@@ -9,7 +9,6 @@
     -ms-overflow-style: -ms-autohiding-scrollbar;
     scroll-behavior: smooth;
     -ms-overflow-style: none;
-    cursor: grab;
     position: relative;
 }
 
