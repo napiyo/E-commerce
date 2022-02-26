@@ -1,40 +1,47 @@
 import React, { useEffect, useState } from "react";
 import "./profile.css";
-import { Avatar, Button, Divider, TextField } from "@mui/material";
+import { Avatar, Button, Divider, Skeleton, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../Redux/UserActions";
 import api from "../config/axiosApi";
 import userDp from "../assests/user.jpeg";
-import { useNavigate } from "react-router-dom";
+import { useAlert } from 'react-alert'
+import { Outlet, useNavigate,NavLink } from "react-router-dom";
+
+// import PersonalDetails from "../ProfileComponents/personalDetails";
 export default function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userState = useSelector((state) => state.UserReducer);
-  const [user, setuser] = useState({});
+
+  // const [user, setuser] = useState({});
   const [loading, setloading] = useState(true);
+  const alert = useAlert()
+
+  const user = useSelector((state)=>state.UserReducer)
   useEffect(() => {
-    if (!userState.isauthenticated) {
+    if (!user.isauthenticated) {
       navigate("/auth");
     }
-    api
-      .get("/api/v2/users/profile")
-      .then((res) => {
-        setuser({ ...res.data.user });
+    // api
+    //   .get("/api/v2/users/profile")
+    //   .then((res) => {
+    //     setuser({ ...res.data.user });
         setloading(false);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, [userState.isauthenticated]);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
+  }, [user]);
 
   const logout = () => {
     api
       .post("http://localhost:4500/api/v2/users/logout")
       .then(() => {
         dispatch(logOut());
+        alert.success("log out succesfully")
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((e) => {
+       console.log(e);
       });
   };
   if (loading) {
@@ -57,11 +64,21 @@ export default function Profile() {
           </div>
         </div>
         <div className="leftSectionbottom">
-          <div className="leftSectionbottomItem currentSectionTitleProfile">
+          
+        <NavLink
+            to="./"
+            className={({ isActive }) =>
+              isActive ? 'currentSectionTitleProfile leftSectionbottomItem ' : "leftSectionbottomItem "
+            }
+          > 
             My Personal Details
-          </div>
+      
+          </NavLink> 
           <Divider />
-          <div className="leftSectionbottomItem">My orders</div>
+          <NavLink to={'./myorders'} className={({ isActive }) =>
+            isActive ? 'currentSectionTitleProfile leftSectionbottomItem ' : "leftSectionbottomItem "
+            }>My orders
+         </NavLink>
           <Divider />
           <Button variant="contained" onClick={logout}>
             Log out
@@ -70,40 +87,7 @@ export default function Profile() {
       </div>
 
       <div className="rightSectionProfile">
-        <div className="profile_right_personalDetails rightProfileSection">
-          <div style={{ width: "100%", textAlign: "end" }}>
-            <Button variant="contained">Edit</Button>
-          </div>
-          <div className="sectionTitleProfile">Personal Details</div>
-          <div className="personalDetails">
-            <TextField
-              value={user.name}
-              disabled
-              variant="outlined"
-              label="name"
-            />
-          </div>
-          <div className="sectionTitleProfile">Contact Details</div>
-          <div className="personalDetails">
-            <TextField
-              value={user.email}
-              disabled
-              variant="outlined"
-              label="Email"
-            />
-          </div>
-          <div className="sectionTitleProfile">Password</div>
-          <div style={{ display: "flex", columnGap: "1vmax" }}>
-            <Button variant="outlined">Change Password</Button>
-            <Button variant="outlined">Forgot Password</Button>
-          </div>
-        </div>
-        <div className="myorderSectionProfile rightProfileSection">
-          <div className="sectionTitleProfile ">
-            My orders
-          </div>
-          
-        </div>
+        {<Outlet />}
       </div>
     </div>
   );

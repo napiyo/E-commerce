@@ -5,11 +5,11 @@ import BookForSlider from './BookForSlider'
 import './slider.css'
 import Aos from "aos"
 import 'aos/dist/aos.css'; 
-
+import { useAlert } from 'react-alert'
 export default function Slider({category}) {
     const [loading, setloading] = useState(true)
     const [products, setproducts] = useState([])
-  
+    const alert = useAlert()
     useEffect(() => {
       Aos.init({duration:1000})
       // const data = await axios.get("http://localhost:4500/api/v1/products/topSellingProducts");
@@ -23,7 +23,7 @@ export default function Slider({category}) {
     
   
       }).catch((e)=>{
-        console.log(e.message);
+        alert.error(e.message);
       })
     }, [])
     if(loading){

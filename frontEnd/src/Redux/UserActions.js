@@ -10,6 +10,9 @@ export const LoggedIn =(u)=> ({
 export const logOut =()=> ({
     type:"LOGGED_OUT",
     user:{
+        id:'no user',
+        email:'please login',
+        name:'please login',
         isauthenticated:false
     }
 })

@@ -2,7 +2,9 @@ import './trendingAuthor.css';
 import React, { useEffect, useState } from 'react'
 import Author from './Author';
 import api from '../config/axiosApi'
+import { useAlert } from 'react-alert'
 export default function () {
+  const alert = useAlert()
   const [topAuthors, settopAuthors] = useState([]);
   const [loading, setloading] = useState(true)
   useEffect(() => {
@@ -14,8 +16,8 @@ export default function () {
     settopAuthors(arr);   
   
     setloading(false)
-   }).catch((err)=>{
-     console.log(err.message);
+   }).catch((e)=>{
+    alert.error(e.message)
    })
   }, [])
   

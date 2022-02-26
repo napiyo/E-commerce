@@ -12,7 +12,7 @@ if(err.name === 'CastError'){
 }
 //if email is already exist in registring user
 if(err.code === 11000){
-    err = new ErrorHandler(`Duplicate ${Object.keys(err.keyValue)} Entered`,400)
+    err = new ErrorHandler(`this ${Object.keys(err.keyValue)} can not be used as this already exists`,400)
 }
 
 //if jwtToken is invalid

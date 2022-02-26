@@ -5,11 +5,13 @@ import {Link, useNavigate} from 'react-router-dom';
 import { Rating } from '@mui/material';
 import {useDispatch} from 'react-redux'
 import {addToCartReduxAction} from '../Redux/cartActions'
+import { useAlert } from 'react-alert';
 export default function BookBox({product}) {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // const [addedToCart, setaddedToCart] = useState(false)
+  const alert = useAlert();
   const toProduct=()=>{
 navigate('/product/'+product._id);
   }
@@ -36,8 +38,10 @@ navigate('/product/'+product._id);
         <div className="actionBtns">
             <button className='buyBtn'><img className='buyNowIcon' src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-buy-ecommerce-kiranshastry-gradient-kiranshastry-1.png"
             alt="loading"/>Buy Now</button>
-            <button className='addToCartBtn' onClick={()=>
-            dispatch(addToCartReduxAction(product))
+            <button className='addToCartBtn' onClick={()=>{
+              alert.success("item added or quantity increased in your cart")
+              dispatch(addToCartReduxAction(product))
+            }
           }> <img className='addToCartBtnIcon' src="https://img.icons8.com/external-icongeek26-flat-icongeek26/64/000000/external-cart-essentials-icongeek26-flat-icongeek26.png"
             alt="loading"/>Add to cart</button>
             

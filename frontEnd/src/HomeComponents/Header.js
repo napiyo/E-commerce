@@ -3,13 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../assests/logo.png";
 import userLogo from "../assests/user.jpeg";
 import "./header.css";
-import { stringify } from "query-string";
 import {Badge, Button, TextField} from '@mui/material'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import {useDispatch, useSelector} from 'react-redux'
 import {useCookies} from 'react-cookie'
 import api from "../config/axiosApi";
-import {LoggedIn,logOut} from '../Redux/UserActions'
+import { useAlert } from 'react-alert'
+import {LoggedIn} from '../Redux/UserActions'
 export default function Header() {
   const cartState =useSelector((state) => state.CartReducer);
   const [cookies, setcookies] = useCookies();
@@ -17,6 +17,7 @@ export default function Header() {
   const dispatch = useDispatch();
   // const [loading, setloading] = useState(true);
   const [searchQuery, setsearchQuery] = useState("");
+  const alert = useAlert()
   useEffect(() => {
   
    if(cookies.token){
@@ -24,8 +25,8 @@ export default function Header() {
     
        dispatch(LoggedIn(res.data.user));
 
-     }).catch((err)=>{
-       console.log(err.message);
+     }).catch((e)=>{
+      alert.error(e.response.data.message || "something went wrong")
       //  dispatch(logOut());
      })
      
@@ -66,7 +67,7 @@ export default function Header() {
           </Link>:
           <>
           <div style={{backgroundImage:`url(${userLogo})`}} id="userLogo"></div>
-            <Link to="/profile">
+            <Link to="/profile/">
             <div className="headerProfile">
              {userState.name}
               <img

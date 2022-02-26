@@ -5,6 +5,7 @@ import 'aos/dist/aos.css';
 import './trendingBooks.css'
 import api from '../config/axiosApi';
 import {Skeleton} from '@mui/material'
+import { useAlert } from 'react-alert';
 export default function TrendingBooks() {
 
   // set loader animation
@@ -13,11 +14,10 @@ export default function TrendingBooks() {
 
 // make trending books scrollable with mouse drag
 // const slider = document.querySelector(".trendingSlider");
+const alert = useAlert()
 const sliderRef= useRef(null);
   useEffect(() => {
     Aos.init({duration:2000})
-    // const data = await axios.get("http://localhost:4500/api/v1/products/topSellingProducts");
-    // console.log(data);
     
     api.get("/api/v1/products/topSellingProducts/7").then((res)=>{
       settrendingProducts(res.data.products);
@@ -27,7 +27,7 @@ const sliderRef= useRef(null);
   
 
     }).catch((e)=>{
-      console.log(e.message);
+      alert.error(e.message)
     })
   }, [])
 

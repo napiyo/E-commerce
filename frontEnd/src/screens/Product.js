@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import bookCover from '../assests/bookCover.jpg'
 import './product.css';
 import { useParams } from "react-router-dom";
-import {Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Rating, Snackbar, TextField} from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Rating, Snackbar, TextField} from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { addToCartReduxAction } from '../Redux/cartActions';
 import api from '../config/axiosApi';
 import Review from '../allproductsListComponents/review';
 // import {queryString} from 'querystring'
 import {stringify} from 'query-string'
+import MyBackDrop from '../utils/backDrop';
+import { useAlert } from 'react-alert';
 
 export default function Product() {
   // useParams 
@@ -17,11 +19,10 @@ export default function Product() {
   const [loading, setloading] = useState(true)
   const [product, setproduct] = useState({});
   const [reviewUpdated, setreviewUpdated] = useState(false)
+  const [processing, setprocessing] = useState(false)
   
   //alert
-  const [showAlert, setshowAlert] = useState(false);
-const [alertMsg, setalertMsg] = useState("");
-const [alertType, setalertType] = useState("");
+   const alert = useAlert();
 
   // write user review
   const [dialogOpen, setdialogOpen] = useState(false)
@@ -33,6 +34,7 @@ const [alertType, setalertType] = useState("");
  }
 // upload review
 const writeReview = ()=>{
+  setprocessing(true);
   if(rattingByuser==0){ setrattingByuser(1)}
    const review = {
      ratting:rattingByuser,
@@ -40,24 +42,18 @@ const writeReview = ()=>{
    }
     
     api.post(`/api/v1/products/addReview/${productId}`,review).then((res)=>{
+      setprocessing(false);
       console.log(res.data);
       handleDialog();
       setreviewUpdated(true)
-      setalertType("success");
-      setalertMsg("review submitted");
-      setshowAlert(true);
-      setTimeout(() => {
-        setshowAlert(false);
-      }, 4000);
-
+      alert.success("review updated");
+      
     }).catch((err)=>{
-      console.log(err.message);
-      setalertType("error");
-      setalertMsg(err.message);
-      setshowAlert(true);
-      setTimeout(() => {
-        setshowAlert(false);
-      }, 4000);
+      // handleDialog();
+      setprocessing(false);
+      alert.error(err.response.data.message || "something went wrong");
+      
+     
       
     })
     setreviewUpdated(false);
@@ -81,7 +77,9 @@ const writeReview = ()=>{
 // add item to cart
 const addtoCart =()=>{
    if(Object.keys(product).length === 0) return;
+
    dispatch(addToCartReduxAction(product));
+   alert.success("product added or increased quantity to your cart")
 }
 
 
@@ -113,21 +111,7 @@ const addtoCart =()=>{
    <div className="rattingSingleProduct"> <span className='backgroundRattingForSingleProduct'>{product.avgRatings}<img src="https://img.icons8.com/material-rounded/16/ffffff/star--v1.png"/></span>
    ({product.numOfReviews} rattings) </div>
    <div className="priceForbookSlider">{product.price} ₹</div>
-   {/* <h3 className="heading">Compare Prices</h3>
-   <table>
-       <tr>
-           <td  className='headerTablePriceCompareSingleProduct'>site</td>
-           <td  className='headerTablePriceCompareSingleProduct'>Price</td>
-       </tr>
-       <tr>
-           <td>flipkart</td>
-           <td>999 ₹</td>
-       </tr>
-       <tr>
-           <td>flipkart</td>
-           <td>999 ₹</td>
-       </tr>
-   </table> */}
+  
    <div className="ProductDiscriptionForSingleProduct">
         <h3 >Product Description</h3>
         <hr />
@@ -141,7 +125,7 @@ const addtoCart =()=>{
 
     <div className="writeReview">
 
-    <Dialog open={dialogOpen} onClose={handleDialog}>
+    <Dialog open={dialogOpen} onClose={handleDialog} style={{zIndex:2}}>
         <DialogTitle>write / update review</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -163,6 +147,7 @@ const addtoCart =()=>{
             id="name"
             label="write your feedback"
             type="text"
+            value={productReviewByUser}
             fullWidth
             multiline
             variant="standard"
@@ -181,10 +166,7 @@ const addtoCart =()=>{
         })
       }
     </div>
-    {(showAlert)?
-      <div className="alert"><Alert variant="filled" severity={alertType}>{alertMsg}</Alert></div>
-:""
-    }
+   <MyBackDrop open={processing} />
     </>
   )
 }

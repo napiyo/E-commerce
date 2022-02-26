@@ -2,11 +2,12 @@ import './catagoriesbooks.css'
 import React, { useEffect, useState } from 'react'
 import Category from './Category'
 import api from '../config/axiosApi'
+import { useAlert } from 'react-alert'
 
 export default function CatagoriesBooks(props) {
   const [loading, setloading] = useState(true)
   const [allCategories, setallCategories] = useState([])
-
+  const alert = useAlert()
   useEffect(() => {
     // const data = await axios.get("http://localhost:4500/api/v1/products/topSellingProducts");
     // console.log(data);
@@ -17,7 +18,7 @@ export default function CatagoriesBooks(props) {
   
 
     }).catch((e)=>{
-      console.log(e.message);
+      alert.error(e.message)
     })
   }, [])
   if(loading){

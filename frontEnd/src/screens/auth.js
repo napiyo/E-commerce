@@ -1,17 +1,18 @@
-import { Button, TextField } from "@mui/material";
+import {  Button, TextField } from "@mui/material";
 import "./auth.css";
 import React, { useEffect, useRef, useState } from "react";
 import api from "../config/axiosApi";
-import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LoggedIn } from "../Redux/UserActions";
-
+import { useAlert } from 'react-alert'
+import MyBackDrop from "../utils/backDrop";
 
 // import second from ''
 
 export default function Auth() {
-  const [cookies, setcookies] = useCookies();
+  const alert = useAlert()
+ 
   let navigate = useNavigate();
   const leftContainer = useRef(null);
   const rightContainer = useRef(null);
@@ -55,46 +56,89 @@ const dispatch = useDispatch(state=>state.UserReducer);
   const [signupPassword, setsignupPassword] = useState("");
   const [userName, setuserName] = useState("")
   const [isloggedIn, setisloggedIn] = useState(false);
+  const [processing, setprocessing] = useState(false);
 const [loading, setloading] = useState(true);
 const userState =useSelector((state) => state.UserReducer);
 
 
   useEffect(() => {
+    setprocessing(true);
    if(userState.isauthenticated){
+     navigate('/profile/');
      setisloggedIn(true);
-     navigate('/profile');
     }
+    setprocessing(false);
     setloading(false)
   }, [userState.isauthenticated])
   
   const login = () => {
+    setprocessing(true);
     api.post("/api/v2/users/login", {
         email: loginEmail,
         password: loginPassword
       },{headers:{'Content-Type':"application/json"}})
       .then((res) => {
-        console.log(res.data);
+        setprocessing(false);
+        alert.success("logged In successfully")
         dispatch(LoggedIn(res.data.user))
         setisloggedIn(true);
         
       })
-      .catch((err) => {
-        console.log(err.message);
+      .catch((e) => {
+        setprocessing(false);
+        if(e.response){
+
+          alert.error(e.response.data.message);
+        }
+        else{
+          console.log(e.message);
+        }
       });
   };
 const signUp = ()=>{
+  setprocessing(true);
   const userData = {
     email:signupEmail,
     password:signupPassword,
     name:userName
   }
   api.post('api/v2/users/newUserRegister',userData).then((res)=>{
+    setprocessing(false);
+    alert.success("welcome")
     dispatch(LoggedIn(res.data.user));
 
-  }).catch((err)=>{
-    console.log(err);
+  }).catch((e)=>{
+    setprocessing(false);
+    if(e.response){
+
+      alert.error(e.response.data.message);
+    }
+    else{
+      console.log(e.message);
+    }
   })
 }
+
+//forgot password
+const forgotPassword =()=>{
+  setprocessing(true);
+ 
+  api.post('/api/v2/users/password/forgot',{email:loginEmail}).then((res)=>{
+    setprocessing(false);
+    alert.success(res.data.message);
+  }).catch((e)=>{
+    setprocessing(false);
+    if(e.response){
+
+      alert.error(e.response.data.message);
+    }
+    else{
+      console.log(e.message);
+    }
+
+  })
+}
+
   if(loading){
     return <>
         <div className="loaderContainer">
@@ -142,7 +186,9 @@ const signUp = ()=>{
             <button id="logInBtn" onClick={login}>
               LOGIN
             </button>
+            <Button onClick={forgotPassword}>forgot Password?</Button>
           </div>
+
         </div>
         <div className="leftOverlay" ref={leftOverlay}>
           <h1>Already have an Account ??</h1>
@@ -192,6 +238,8 @@ const signUp = ()=>{
           </button>
         </div>
       </div>
+      {/* backDrop when something processing */}
+      <MyBackDrop open={processing} />
     </div>
   );
 }

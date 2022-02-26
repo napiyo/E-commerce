@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import './searchpage.css'
-import { useParams, useSearchParams } from 'react-router-dom'
+import {  useSearchParams } from 'react-router-dom'
 import api from '../config/axiosApi';
 import BookForSlider from '../HomeComponents/BookForSlider';
-import ReactPaginate from 'react-paginate';
+import { useAlert } from 'react-alert'
+import { Pagination } from '@mui/material';
 export default function SearchPage() {
     let [searchParams] =  useSearchParams();
     let searchQuery= searchParams.get('keyword');
@@ -11,16 +12,17 @@ export default function SearchPage() {
     const [products, setproducts] = useState([])
     const [totalPages, settotalPages] = useState(1);
     const [currentPage, setcurrentPage] = useState(1);
+    const alert = useAlert()
   
     useEffect(() => {
       api.get(`/api/v1/products?keyword=${searchQuery}&page=${currentPage}`).then((res)=>{
             setproducts(res.data.products);
-            settotalPages(res.data.filteredProductCount/res.data.resultPerPage);
+            settotalPages(Math.ceil(res.data.filteredProductCount/res.data.resultPerPage));
             setloading(false)
-      }).catch((err)=>{
-          console.log(err.message);
+      }).catch((e)=>{
+        alert.error(e.message)
       })
-    }, [searchQuery])
+    }, [searchQuery,currentPage])
     
     if(loading){
         return <>
@@ -48,21 +50,25 @@ export default function SearchPage() {
                 </>})
             }
             </div>
+            <div style={{display:'flex',justifyContent:'center',margin:'2vmax 0'}}>         
         {(totalPages < 2 )?"":
-        <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={(data)=>setcurrentPage(data.selected+1)}
-        pageRangeDisplayed={5}
-        pageCount={totalPages}
-        previousLabel="< previous"
-        className='pagination'
-        pageClassName='paginationItem'
-        nextClassName='paginationItem'
-        previousClassName='paginationItem'
-        activeClassName='pageActive'
-        // renderOnZeroPageCount={null}
-      />}
+        <Pagination shape='rounded' count={totalPages} color="secondary" page={currentPage} onChange={(e,value)=>setcurrentPage(value)} />
+      //   <ReactPaginate
+      //   breakLabel="..."
+      //   nextLabel="next >"
+      //   onPageChange={(data)=>setcurrentPage(data.selected+1)}
+      //   pageRangeDisplayed={5}
+      //   pageCount={totalPages}
+      //   previousLabel="< previous"
+      //   className='pagination'
+      //   pageClassName='paginationItem'
+      //   nextClassName='paginationItem'
+      //   previousClassName='paginationItem'
+      //   activeClassName='pageActive'
+      //   // renderOnZeroPageCount={null}
+      // />
+      }
+         </div>
     </div>
   )
 }
