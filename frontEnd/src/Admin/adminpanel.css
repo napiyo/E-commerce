@@ -1,0 +1,19 @@
+.adminPanelBox {
+    display: flex;
+    width: 100%;
+    min-height: 100%
+}
+
+.sideBarAdmin {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    font-weight: 600;
+    row-gap: 1vmax;
+    align-items: center;
+    width: 20%;
+    padding-top: 2vmax;
+    /* height: '100vh'; */
+    background: aquamarine;
+    /* height: 100vh; */
+}

@@ -4,4 +4,6 @@
     align-items: center;
     min-height: 90vh;
     min-width: 100vw;
+    flex-direction: column;
+    column-gap: 1vmax;
 }

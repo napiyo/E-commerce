@@ -37,3 +37,11 @@ export const delFromCartReduxAction= (product) => {
         }
     }
 }
+
+// empty cart
+export const emptyCart = ()=>{
+    return{
+        type:"EMPTY_CART"
+
+    }
+}

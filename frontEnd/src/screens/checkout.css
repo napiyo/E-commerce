@@ -1,0 +1,23 @@
+.checkoutbody {
+    display: flex;
+    width: 80vw;
+    margin: auto;
+    min-height: 80vh;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.actionBtnForCheckout {
+    display: flex;
+    justify-content: space-between;
+}
+
+.orderplacedSuccessFully {
+    display: flex;
+    min-height: 30%;
+    width: 100%;
+    flex-direction: column;
+    row-gap: 2vmax;
+    justify-content: center;
+    align-items: center;
+}

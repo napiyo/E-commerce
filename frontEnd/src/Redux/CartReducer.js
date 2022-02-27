@@ -34,6 +34,8 @@ export default function CartReducer(state=[],action){
               break;
               case "DEL_ITEM_CART":
                   return state.filter((item)=> item.id != product.id);
+              case "EMPTY_CART":
+                  return [];
             default: 
                 return state;
         }

@@ -50,12 +50,18 @@ const orderSchema = mongoose.Schema({
                 type:String,
                 default:"unpaid"
             },
-            paymentDetails:{
+            paymentId:{
                 type:String,
                 default:"unpaid"
-            }
+            },
+            razorpayOrderId:{
+                type:String,
+                default:"unpaid"
+            },
+            razorpaySignature:String
            
         },
+     
         orderedBy:{
             type:mongoose.Schema.ObjectId,
             ref:"User",
@@ -66,18 +72,21 @@ const orderSchema = mongoose.Schema({
             default:Date.now
         },
         price:{
-            itemPrice:{
-                type:Number,
+
+            type:Number,
                 required:true
-            },
-            shippingPrice:{
-                type:Number,
-                required:true
-            },
-            totalPrice:{
-                type:Number,
-                required:true
-            }
+            // itemPrice:{
+            //     type:Number,
+            //     required:true
+            // },
+            // shippingPrice:{
+            //     type:Number,
+            //     required:true
+            // },
+            // totalPrice:{
+            //     type:Number,
+            //     required:true
+            // }
         },
         orderStatus:{
             type:String,

@@ -22,6 +22,8 @@ import {CookiesProvider} from 'react-cookie'
 import SearchPage from './screens/searchPage';
 import Error404 from './screens/Error404';
 import AlertTemplate from 'react-alert-template-basic'
+import Checkout from './screens/Checkout';
+import Dashboard from './Admin/Dashboard';
 
 // alert options
 const options = {
@@ -47,9 +49,13 @@ ReactDOM.render(
        <Route path='myorders' element={<Myorders />} />
        <Route path='' element={<PersonalDeatails />} />
       </Route>
-    <Route path="/admin" element={<AdminPanel />} />
+    <Route path="admin" element={<AdminPanel />} >
+    <Route path='dashboard' element={<Dashboard />} />
+    <Route path='' element={<Dashboard />} />
+      </Route>
     <Route path="/auth" element={<Auth />} />
     <Route path="/search" element={<SearchPage />} />
+    <Route path="/checkout" element={<Checkout />} />
     <Route path="/" element={<Home />} />
     <Route path="*" element={<Error404 />} />
    

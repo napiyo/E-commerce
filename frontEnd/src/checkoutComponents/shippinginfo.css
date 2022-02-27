@@ -1,0 +1,21 @@
+.shippingInfo_checkout {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.shippingInfo_checkoutBox {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2vmax;
+    /* width: 100%; */
+    width: 60%;
+    padding: 2vmax;
+}
+
+.shippingInfo_checkOut_sameLine {
+    display: flex;
+    column-gap: 2vmax;
+    align-items: flex-start;
+    width: fit-content;
+}

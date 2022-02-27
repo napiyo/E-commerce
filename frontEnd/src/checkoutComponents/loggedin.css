@@ -1,0 +1,8 @@
+.checkOut_loggedIn_componenetBox {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vmax;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+}

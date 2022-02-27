@@ -2,6 +2,7 @@ import './cart.css';
 import React, { useEffect, useState } from 'react'
 import CartSingleItem from '../CartComponents/CartSingleItem';
 import {useSelector} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 export default function Cart() {
   const [cartPrice, setcartPrice] = useState(0);
@@ -26,7 +27,9 @@ export default function Cart() {
        {(cartState.length==0)?<h3>No item found in your cart</h3>:
         <div className="CartPriceSummary">
          <span style={{fontWeight:700}} >Total Payable amount {cartPrice} ₹</span> 
-        <button className='addToCartBtn'>CheckOut</button>
+       <Link to='/checkout' className='addToCartBtn'>
+        <button className='addToCartBtn' >CheckOut</button>
+       </Link>
         </div>
         }
     </div>

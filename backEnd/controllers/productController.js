@@ -101,7 +101,7 @@ exports.addReview = catchAsyncError(async(req,res,next)=>{
             return next(new ErrorHandler("product not found",404));
         }
         const ratting =  Number(req.body.ratting);
-        const comment = req.body.comment;
+        const comment = req.body.comment || "no comment";
         // already reviewed ?? then update else add
         const isReviewed = product.reviews.find((review) => review.userId.toString() === req.user._id.toString() );
         

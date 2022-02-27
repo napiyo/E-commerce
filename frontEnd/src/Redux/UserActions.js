@@ -4,7 +4,9 @@ export const LoggedIn =(u)=> ({
         id:u._id,
         email:u.email,
         name:u.name,
-        isauthenticated:true
+        role:u.role,
+        isauthenticated:true,
+        loaded:true
     }
 })
 export const logOut =()=> ({
@@ -13,6 +15,8 @@ export const logOut =()=> ({
         id:'no user',
         email:'please login',
         name:'please login',
-        isauthenticated:false
+        role:'please login',
+        isauthenticated:false,
+        loaded:true
     }
 })

@@ -1,16 +1,44 @@
 import { Skeleton } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import api from '../config/axiosApi';
-
+import bookCover from '../assests/bookCover.jpg'
+import { DataGrid } from '@mui/x-data-grid';
+import { useAlert } from 'react-alert'
 export default function Myorders() {
     const [loading, setloading] = useState(true);
-    const [Myorders, setMyorders] = useState([]);
+    const [myorders, setmyorders] = useState([]);
+    const [rows, setrows] = useState([{'id':1,'orderID':'demo','amount':0,'Status':'loading'}]);
+    const alert = useAlert();
     useEffect(() => {
-      api.get('/api/v3/orders/myOrders').then((res)=>{
-          setMyorders(res.data.order);
-        //   setloading(false);
-      })
+     api.get('/api/v3/orders/myOrders').then((res)=>{
+        setmyorders(res.data.order)
+
+        const  row = [];
+          res.data.order.map((order,index)=>{
+         row.push({'id':index,'orderID':order._id,'amount':order.price,'Status':order.orderStatus})
+        
+          })
+     
+          setrows([...row]);
+      
+          setloading(false);
+        }).catch((e)=>{
+          alert.error("couldn't load orders")
+          console.log(e);
+        })
     }, [])
+    
+   
+
+  // const row = [{'id':1,
+  // 'orderID':'asdf','amount':'3','Status':'done'}];
+
+    const column =[
+      { field: 'orderID', headerName: 'order id', width: 150 },
+      { field: 'amount', headerName: 'amount', width: 150 },
+      { field: 'Status', headerName: 'status', width: 150 },
+ 
+    ]
 
 if(loading){
 
@@ -23,6 +51,19 @@ if(loading){
         </>
     }
   return (
-   <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga esse aut quasi doloribus, neque laudantium nemo in mollitia fugit maiores natus, ratione molestias deserunt. Atque ex assumenda itaque, nobis mollitia velit inventore magni possimus laudantium sed sapiente ea ipsam veniam explicabo corporis eligendi? Aliquam asperiores eaque temporibus eius, sapiente aperiam odio, soluta deleniti iusto officia mollitia dolorum accusantium vel velit maiores ex facere eos. Amet vel nostrum repudiandae quis ad, earum velit neque pariatur libero in architecto magni error molestiae aspernatur minima totam consequuntur dolor. Mollitia nam officia veniam accusamus doloremque! Qui distinctio, assumenda error minus odio nostrum nam. Ullam.</div>
+    <>
+  <div style={{ display: 'flex',height:'40vh' }}>
+  <div style={{ flexGrow: 1 }}>
+{(myorders.length===0)?"No orders has placed yet":<DataGrid 
+    rows={rows}
+    columns={column}
+   
+ 
+    />}
+  
+  </div>
+</div>
+ 
+  </>
   )
 }

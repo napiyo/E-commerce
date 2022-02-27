@@ -1,4 +1,14 @@
-export default function UserReducer(state = {isauthenticated:false}, action) {
+const initial ={
+        id:'loading',
+        email:'loading',
+        name:'loading',
+        role:'loading',
+        isauthenticated:false,
+        loaded:false
+}
+
+
+export default function UserReducer(state = initial, action) {
     switch (action.type) {
         case "LOGGED_IN":
             return action.user;

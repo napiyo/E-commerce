@@ -6,7 +6,8 @@ import { logOut } from "../Redux/UserActions";
 import api from "../config/axiosApi";
 import userDp from "../assests/user.jpeg";
 import { useAlert } from 'react-alert'
-import { Outlet, useNavigate,NavLink } from "react-router-dom";
+import { Outlet, useNavigate,NavLink, Link } from "react-router-dom";
+import MyBackDrop from "../utils/backDrop";
 
 // import PersonalDetails from "../ProfileComponents/personalDetails";
 export default function Profile() {
@@ -19,7 +20,7 @@ export default function Profile() {
 
   const user = useSelector((state)=>state.UserReducer)
   useEffect(() => {
-    if (!user.isauthenticated) {
+    if ( user.loaded && !user.isauthenticated) {
       navigate("/auth");
     }
     // api
@@ -46,11 +47,9 @@ export default function Profile() {
   };
   if (loading) {
     return (
-      <>
-        <div className="loaderContainer">
-          <div className="loader"></div>
-        </div>
-      </>
+      <div style={{height:'100vh'}}>
+       <MyBackDrop open={true}/>
+      </div>
     );
   }
   return (
@@ -80,6 +79,9 @@ export default function Profile() {
             }>My orders
          </NavLink>
           <Divider />
+         {(user.role==='admin')? <Link to='/admin' className="leftSectionbottomItem">Admin Dashboard</Link>
+        :"" 
+        }
           <Button variant="contained" onClick={logout}>
             Log out
           </Button>
