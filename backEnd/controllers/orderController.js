@@ -12,7 +12,10 @@ const updateStocks = async(productId,quantity)=>{
         return new ErrorHandler("product not found",404);
     }
     product.Stock+=quantity;
-    product.unitSold-=quantity;
+ 
+
+        product.unitSold-=quantity;
+  
 
     product.save();
 }
@@ -70,7 +73,7 @@ exports.getAllOrders = catchAsyncError(async(req,res,next)=>{
     const order = await orderModel.find();
     let totalAmount =0;
     order.forEach((order)=>{
-        totalAmount+= order.price.totalPrice;
+        totalAmount+= order.price || 0;
     })
    
     res.status(200).json({
@@ -88,9 +91,12 @@ exports.updateOrderStatus = catchAsyncError(async(req,res,next)=>{
   if(!order){
       return next(new ErrorHandler("order not found",403))
   }
-  if(order.orderStatus === "delivered"){
+  if(order.orderStatus === "delivered" ){
       return next(new ErrorHandler("order is delivered , cant update status"),403)
   }
+  if(order.orderStatus === "canceled" ){
+    return next(new ErrorHandler("order is canceled , cant update status"),403)
+}
     order.orderStatus=req.body.status;
     
     if(req.body.status==="delivered"){

@@ -32,3 +32,51 @@
     font-size: 2rem;
     font-weight: 600;
 }
+
+.sameLine {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1vmax;
+    margin-top: 0.3vmax;
+    font-size: large;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.outofstockchart {
+    width: 250px;
+    /* padding: 2vmax; */
+}
+
+.dashboardBottom {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 2vmax;
+    column-gap: 3vmax;
+    flex-wrap: wrap;
+}
+
+.dashboardOutOfStockItem {
+    display: flex;
+    column-gap: 1vmax;
+    justify-content: space-between;
+    padding: 1vmax;
+}
+
+.dashboardOutOfstockList {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.dashboardOutOfStockItemHeader {
+    background-color: rgb(47, 76, 209);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+}

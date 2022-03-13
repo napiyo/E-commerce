@@ -34,6 +34,16 @@ exports.getTopSellingProducts = catchAsyncError(async(req,res)=>{
 
     });
 
+// get out of stock products
+exports.getOutOfStockProducts = catchAsyncError(async(req,res)=>{
+    
+    const products = await productModel.find({Stock: {$lte:0}});
+    res.status(200).json({
+        sucess:true,
+        products});
+
+    });
+
 
 // Create Products - Admin Only
 

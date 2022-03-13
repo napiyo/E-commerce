@@ -57,8 +57,7 @@ if(loading){
 {(myorders.length===0)?"No orders has placed yet":<DataGrid 
     rows={rows}
     columns={column}
-   
- 
+   sx={{width:'70%'}}
     />}
   
   </div>

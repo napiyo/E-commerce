@@ -99,7 +99,7 @@ const addtoCart =()=>{
     <>
     <div className='singleProductContainer'>
         <div className="productImagesAndBtns">
-                <img src={bookCover} alt="Loading" className='ImageForSingleProduct' />
+                <img src={product.images[0].public_url} alt="Loading" className='ImageForSingleProduct' />
                 <div className="btnsSignleProduct">
                 <button className='buyBtn' style={{padding:'10px 20px'}}><img className='buyNowIcon' src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-buy-ecommerce-kiranshastry-gradient-kiranshastry-1.png"/>Buy Now</button>
               <button className='addToCartBtn' onClick={addtoCart} style={{padding:'10px 20px'}}> <img className='addToCartBtnIcon' src="https://img.icons8.com/external-icongeek26-flat-icongeek26/64/000000/external-cart-essentials-icongeek26-flat-icongeek26.png"/>Add to cart</button>

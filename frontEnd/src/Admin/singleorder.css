@@ -1,0 +1,18 @@
+.adminSingleOrderDetails {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vmax;
+    padding: 1vmax;
+}
+
+.singleOrderSingleDeatils {
+    display: flex;
+    flex-direction: column;
+    padding: 0 2vmax;
+    row-gap: 1vmax;
+}
+
+.singleOrderSingleDeatilsItem {
+    display: flex;
+    justify-content: space-between;
+}

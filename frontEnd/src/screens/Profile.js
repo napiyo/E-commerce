@@ -79,7 +79,7 @@ export default function Profile() {
             }>My orders
          </NavLink>
           <Divider />
-         {(user.role==='admin')? <Link to='/admin' className="leftSectionbottomItem">Admin Dashboard</Link>
+         {(user.role==='admin')? <Link to='/admin/dashboard' className="leftSectionbottomItem">Admin Dashboard</Link>
         :"" 
         }
           <Button variant="contained" onClick={logout}>

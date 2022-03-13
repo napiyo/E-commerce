@@ -68,7 +68,7 @@ const productSchema = new mongoose.Schema({
         },
         comment:{
             type:String,
-             required:true
+             default:"no comment"
         }
     }],
     createdBy:{

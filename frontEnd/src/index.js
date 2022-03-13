@@ -24,6 +24,11 @@ import Error404 from './screens/Error404';
 import AlertTemplate from 'react-alert-template-basic'
 import Checkout from './screens/Checkout';
 import Dashboard from './Admin/Dashboard';
+import Users from './Admin/Users';
+import Orders from './Admin/Orders';
+import SingleOrder from './Admin/SingleOrder';
+import Products from './Admin/Products';
+
 
 // alert options
 const options = {
@@ -51,7 +56,12 @@ ReactDOM.render(
       </Route>
     <Route path="admin" element={<AdminPanel />} >
     <Route path='dashboard' element={<Dashboard />} />
-    <Route path='' element={<Dashboard />} />
+    <Route path='users' element={<Users />} />
+    <Route path='products' element={<Products />} />
+
+    <Route path='orders' element={<Orders />} />
+    <Route path='orders/:orderID' element={<SingleOrder />} />
+
       </Route>
     <Route path="/auth" element={<Auth />} />
     <Route path="/search" element={<SearchPage />} />

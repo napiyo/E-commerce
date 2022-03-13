@@ -12,7 +12,7 @@ export default function BookForSlider({product}) {
   return (
     <Link to={`/product/${product._id}`}>
     <div className='bookforsliderBox'  data-aos="flip-up">
-        <img src={bookCover} alt="loading" className='bookCoverforSlider' />
+        <img src={product.images[0].public_url} alt="loading" className='bookCoverforSlider' />
         <div className="bookTitleForSlider">{product.name}</div>
         <div className="priceForbookSlider">{product.price} ₹</div>
     </div>

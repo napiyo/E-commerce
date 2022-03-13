@@ -17,9 +17,9 @@ navigate('/product/'+product._id);
   }
   return (
  <div className='bookBox' >
-    <div className="bookCover" onClick={toProduct}  style={{backgroundImage:`url(${bookCover})`}}></div>
+    <div className="bookCover" onClick={toProduct}  style={{backgroundImage:`url(${product.images[0].public_url})`}}></div>
     <div className="bookInfo">
-        <div className="bookTitle">{product.name}</div>
+        <div className="bookTitle">{product.name.slice(0,70)}</div>
         <div className="author">{product.author}</div>
         <div style={{margin:'3px 0'}}>
         <div className="starRatting">

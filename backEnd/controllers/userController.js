@@ -185,7 +185,7 @@ exports.updatePassword = catchAsyncError(async (req,res,next) =>{
 
 })
 
-// update current user details
+// update current user details -- self
 exports.updateProfile = catchAsyncError(async(req,res,next)=>{
 
 

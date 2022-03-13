@@ -13,7 +13,7 @@
     align-items: center;
     width: 20%;
     padding-top: 2vmax;
-    /* height: '100vh'; */
+    min-height: 100vh;
     background: aquamarine;
     /* height: 100vh; */
 }

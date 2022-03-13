@@ -9,7 +9,7 @@ export default function AdminPanel() {
   const navigate = useNavigate();
   const alert = useAlert();
   useEffect(() => {
-    console.log(user);
+   
     if(user.loaded && (!user.isauthenticated || user.role != 'admin' )){
         navigate('/')
     }
@@ -22,7 +22,7 @@ export default function AdminPanel() {
          </div>
          <Divider sx={{bgcolor:'black',width:'100%'}} />
         
-         <NavLink to=''
+         <NavLink to='dashboard'
          className={({ isActive }) =>
          isActive ? 'currentSectionTitleProfile leftSectionbottomItem ' : "leftSectionbottomItem "
        }
@@ -41,7 +41,9 @@ export default function AdminPanel() {
          className={({ isActive }) =>
          isActive ? 'currentSectionTitleProfile leftSectionbottomItem ' : "leftSectionbottomItem "
        }
-         > Products</NavLink>
+         > Products</NavLink> 
+        
+         
         
        </div>
        <Outlet />
