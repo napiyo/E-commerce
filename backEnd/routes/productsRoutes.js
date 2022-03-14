@@ -1,4 +1,4 @@
-const express = require('Express');
+const express = require('express');
 const { getAllProducts, createProduct, updateProduct, DeleteProduct, getSingleProduct, addReview, getReview, deleteReview, getTopSellingProducts, getAllCategories, getOutOfStockProducts } = require('../controllers/productController.js');
 const { isAuthenticated, authorizedRoles } = require('../middleware/auth.js');
 
