@@ -1,5 +1,4 @@
 const app = require('./app.js');
-const dotenv = require('dotenv');
 const connectDatabase = require('./config/database.js');
 const express = require('express')
 
@@ -13,8 +12,10 @@ const express = require('express')
    
 });
 
+if(process.env.NODE_ENV !=="PRODUCTION"){
 
-dotenv.config({path:'./config/config.env'})
+    require('dotenv').config({path:'./config/config.env'})
+}
 
 connectDatabase();
 const PORT = process.env.PORT || 4100;
