@@ -110,7 +110,7 @@ const dispatch = useDispatch();
 function paymentSuccessfull(response){
    setpaid(true);
    setActiveStep(activeStep+1);
-   dispatch(emptyCart());
+  //  dispatch(emptyCart());
    // empty cart
    let orderedItem=[];
    cartState.map((item)=>{
@@ -272,7 +272,7 @@ rzp1.on('payment.failed', function (response){
        {(paid)?<div className="orderplacedSuccessFully">
   <img src={successIcon} alt="order placed"  width='100px' height='100px'/>
   <div>Your order has been placed and payment is done successfully</div>
-  <Link to='/'><Button>Go to home</Button></Link>
+  <Link to='/'><Button onClick={()=> dispatch(emptyCart())}>Go to home</Button></Link>
   </div>:"" }
      {(!paid)?<div className="actionBtnForCheckout">
           <Button disabled={activeStep ===leaststep || paid} onClick={handleBack}>Back</Button>

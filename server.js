@@ -1,7 +1,7 @@
 const app = require('./app.js');
 const dotenv = require('dotenv');
 const connectDatabase = require('./config/database.js');
-
+const express = require('express')
 
 
  // Handling uncaught Exception
@@ -18,6 +18,8 @@ dotenv.config({path:'./config/config.env'})
 
 connectDatabase();
 const PORT = process.env.PORT || 4100;
+
+
 const server = app.listen(PORT,()=>{
     console.log(`server running on ${process.env.endPoint}:${PORT}`);
 })

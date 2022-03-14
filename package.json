@@ -5,7 +5,8 @@
     "main": "app.js",
     "scripts": {
         "start": "node server.js",
-        "dev": "nodemon server.js"
+        "dev": "nodemon server.js",
+        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix frontEnd && npm run build --prefix client && npm i && npm install --prefix frontEnd"
     },
     "author": "",
     "license": "ISC",

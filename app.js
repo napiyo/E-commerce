@@ -19,7 +19,10 @@ app.use('/api/v2/users',userRouter);
 app.use('/api/v3/orders',orderRouter);
 app.use('/api/v4/payments',paymentsRoutes);
 
-
+app.use(express.static(path.join(__dirname,"./frontEnd/build")));
+app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname,"./frontEnd/build/index.html"))
+})
 // middleware for error
 app.use(errorMiddleware)
 
