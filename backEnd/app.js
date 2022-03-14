@@ -1,4 +1,4 @@
-const express = require('Express');
+const express = require('express');
 const errorMiddleware = require('./middleware/error')
 const cookieParser = require('cookie-parser');
 const cors = require('cors');

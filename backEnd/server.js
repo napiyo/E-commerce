@@ -12,9 +12,9 @@ const express = require('express')
    
 });
 
-if(process.env.NODE_ENV !=="PRODUCTION"){
-
-    require('dotenv').config({path:'./config/config.env'})
+if(!process.env.NODE_ENV || process.env.NODE_ENV !=="PRODUCTION" ){
+     const dotenv = require('dotenv');
+    dotenv.config({path:'./config/config.env'})
 }
 
 connectDatabase();
