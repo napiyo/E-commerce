@@ -1,6 +1,6 @@
 const app = require('./app.js');
 const connectDatabase = require('./config/database.js');
-const express = require('express')
+const dotenv = require('dotenv');
 
 
  // Handling uncaught Exception
@@ -12,8 +12,8 @@ const express = require('express')
    
 });
 
-if(!process.env.NODE_ENV || process.env.NODE_ENV !=="PRODUCTION" ){
-     const dotenv = require('dotenv');
+if( process.env.NODE_ENV !=="PRODUCTION" ){
+    
     dotenv.config({path:'./config/config.env'})
 }
 
