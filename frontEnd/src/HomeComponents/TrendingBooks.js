@@ -67,7 +67,7 @@ slider.addEventListener('mouseleave', stopDragging, false);
 
         <h3 className='heading'>Trending Books</h3>
         <div className="trendingSlider" ref={sliderRef} data-aos="fade-left">
-         { (trendingProducts.length==0)?
+         { (!trendingProducts || trendingProducts.length==0)?
          <>
          <Skeleton  height={'25em'} className='bookBox' style={{marginTop:'-60px',marginBottom:'-50px'}}/>
          <Skeleton  height={'25em'} className='bookBox' style={{marginTop:'-60px',marginBottom:'-50px'}}/>

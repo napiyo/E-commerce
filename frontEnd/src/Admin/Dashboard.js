@@ -26,7 +26,7 @@ export default function Dashboard() {
      {
      
        backgroundColor:["red","green"],
-       data:[outofStock.length,totalProducts-outofStock.length]
+       data:[(outofStock)?outofStock.length:0,totalProducts-(outofStock)?outofStock.length:0]
      }
    ]
  }
