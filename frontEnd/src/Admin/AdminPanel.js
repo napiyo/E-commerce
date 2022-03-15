@@ -11,9 +11,9 @@ export default function AdminPanel() {
   useEffect(() => {
    
     if(user.loaded && (!user.isauthenticated || user.role != 'admin' )){
-        navigate('/')
+        navigate('/profile')
     }
-  }, [user])
+  }, [user.id])
     return (
      <div className="adminPanelBox">
        <div className="sideBarAdmin">

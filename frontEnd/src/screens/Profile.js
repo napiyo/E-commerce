@@ -20,19 +20,14 @@ export default function Profile() {
 
   const user = useSelector((state)=>state.UserReducer)
   useEffect(() => {
+    
     if ( user.loaded && !user.isauthenticated) {
       navigate("/auth");
     }
-    // api
-    //   .get("/api/v2/users/profile")
-    //   .then((res) => {
-    //     setuser({ ...res.data.user });
+
         setloading(false);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
-  }, [user]);
+
+  }, [user.id]);
 
   const logout = () => {
     api

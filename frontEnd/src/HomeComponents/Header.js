@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useCookies} from 'react-cookie'
 import api from "../config/axiosApi";
 import { useAlert } from 'react-alert'
-import {LoggedIn} from '../Redux/UserActions'
+import {LoggedIn, logOut} from '../Redux/UserActions'
 export default function Header() {
   const cartState =useSelector((state) => state.CartReducer);
   const [cookies, setcookies] = useCookies();
@@ -18,9 +18,11 @@ export default function Header() {
   // const [loading, setloading] = useState(true);
   const [searchQuery, setsearchQuery] = useState("");
   const alert = useAlert()
-  useEffect(() => {
+
+  useEffect(() => { 
   
    if(cookies.token){
+     console.log("im header if",userState);
      api.get('/api/v2/users/profile').then((res)=>{
     
        dispatch(LoggedIn(res.data.user));
@@ -28,11 +30,18 @@ export default function Header() {
      }).catch((e)=>{
       (e.response)?alert.error(e.response.data.message):alert.error("something went wrong")
       //  dispatch(logOut());
-     })
-     
+      })
+      
+    }
+    else{
+      // update redux store as no user.. and loaded true
+ 
+      if (  !userState.isauthenticated) {
+          dispatch(logOut())
+      }
    }
   //  setloading(false);
-  }, [userState.isauthenticated]);
+  }, [userState.id]);
   const navigate = useNavigate();
   const search =()=>{
         navigate(`/search?keyword=${searchQuery}`);

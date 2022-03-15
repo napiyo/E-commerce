@@ -69,11 +69,11 @@ const userState =useSelector((state) => state.UserReducer);
     }
     setprocessing(false);
     setloading(false)
-  }, [userState.isauthenticated])
+  }, [userState.id])
   
-  const login = () => {
+  const login = async() => {
     setprocessing(true);
-    api.post("/api/v2/users/login", {
+    await api.post("/api/v2/users/login", {
         email: loginEmail,
         password: loginPassword
       },{headers:{'Content-Type':"application/json"}})
