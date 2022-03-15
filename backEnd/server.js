@@ -12,7 +12,7 @@ const dotenv = require('dotenv');
    
 });
 
-if( process.env.NODE_ENV !=="PRODUCTION" ){
+if( process.env.SITE_MODE !=="DEVELOPMENT" ){
     
     dotenv.config({path:'./config/config.env'})
 }
