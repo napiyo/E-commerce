@@ -1,0 +1,7 @@
+.processingCell {
+    background-color: rgba(30, 216, 30, 0.521);
+    font-weight: 600;
+    border-radius: 5px;
+    color: rgb(33, 6, 151);
+    text-transform: capitalize;
+}

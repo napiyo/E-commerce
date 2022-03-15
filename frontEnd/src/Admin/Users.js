@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './users.css'
-import {DataGrid} from '@mui/x-data-grid';
+import {DataGrid, GridActionsCellItem, GridToolbar} from '@mui/x-data-grid';
 import api from '../config/axiosApi';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Pagination, Select } from '@mui/material';
 import {Delete, Edit} from '@mui/icons-material'
@@ -71,42 +71,28 @@ setloading(false)
 
     const column =[
         { field: 'name', headerName: 'Name', width: 300 },
-        { field: 'email', headerName: 'Email', width: 300 },
+        { field: 'email', headerName: 'Email', width: 300,flex:1 },
         { field: 'role', headerName: 'Role', width: 150},
-        // edit
-        { field: 'edit', headerName: 'Edit',sortable:false , renderCell: (cellValues) => {
-            return (
-                <Edit
-                variant="contained"
-                color="primary"
-                style={{cursor:'pointer'}}
-                onClick={() => {
-               
-                    setuserToBeEdit({id:cellValues.id,role:cellValues.row.role});
-                handleEditPrompt()
-                }}
-              />
-  
-              
-            );
-          }},
-
-          //delete
-        { field: 'delete', headerName: 'delete',sortable:false , renderCell: (cellValues) => {
-            return (
-                <Delete
-                variant="contained"
-                color="primary"
-                style={{cursor:'pointer'}}
+          {
+            field: "actions",
+            type: "actions",
+            getActions: (cellValues) => [
+              <GridActionsCellItem icon={<Edit />} label="edit" 
+              onClick={() => {
+                setuserToBeEdit({id:cellValues.id,role:cellValues.row.role});
+            handleEditPrompt()
+            }}
+              />,
+              <GridActionsCellItem
+                icon={<Delete />}
                 onClick={() => {
                     setuserTobeDelete(cellValues.id);
                  handleDeletePromt();
                 }}
-              />
-           );
-          }},
-
-   
+                label="delete"
+              />,
+            ],
+          },
       ]
 
   return (
@@ -118,6 +104,7 @@ setloading(false)
     loading={loading}
     autoHeight
     disableSelectionOnClick
+    components={{ Toolbar: GridToolbar }}
     />
 
     

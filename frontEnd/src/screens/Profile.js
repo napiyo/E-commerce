@@ -82,7 +82,7 @@ export default function Profile() {
          {(user.role==='admin')? <Link to='/admin/dashboard' className="leftSectionbottomItem">Admin Dashboard</Link>
         :"" 
         }
-          <Button variant="contained" onClick={logout}>
+          <Button variant="contained" onClick={logout} sx={{width:'100%',marginTop:"1vmax"}}>
             Log out
           </Button>
         </div>

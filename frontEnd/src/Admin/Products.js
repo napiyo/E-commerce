@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./products.css";
 import { useAlert } from "react-alert";
 import api from "../config/axiosApi";
-import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
+import { DataGrid, GridActionsCellItem, GridToolbar } from "@mui/x-data-grid";
 import { Close, Delete, Edit, Launch } from "@mui/icons-material";
 import {
   Alert,
@@ -69,10 +69,10 @@ export default function Products() {
   const column = [
     { field: "name", headerName: "Name", flex: 1 },
     { field: "price", headerName: "Price", width: 100 },
-    { field: "Stock", headerName: "stock", width: 100 },
+    { field: "Stock", headerName: "stock", width: 100, },
     { field: "category", headerName: "category", width: 100 },
     { field: "unitSold", headerName: "units sold", width: 100 },
-    { field: "createdBy", headerName: "created By", width: 100 },
+    { field: "createdBy", headerName: "created By", width: 200 },
     {
       field: "actions",
       type: "actions",
@@ -273,6 +273,7 @@ const editProduct=async()=>{
         getRowId={(r) => r._id}
         autoHeight
         disableSelectionOnClick
+        components={{ Toolbar: GridToolbar }}
       />
 
       {/* edit product  */}

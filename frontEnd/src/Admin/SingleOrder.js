@@ -82,7 +82,7 @@ const changeOrderStatus = (status)=>{
 
 // order items
 const column = [
-    { field: 'name', headerName: 'item Name', width: 200 },
+    { field: 'name', headerName: 'item Name', width: 200 ,flex:1},
     { field: 'quantity', headerName: 'Quantity', width: 100 },
     { field: 'price', headerName: 'price/item', width: 100 },
     { field: 'productId', headerName: 'product id', width: 200 },

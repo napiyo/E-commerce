@@ -20,7 +20,7 @@ export default function AdminPanel() {
          <div className="adminPanelLogo">
            Bookias
          </div>
-         <Divider sx={{bgcolor:'black',width:'100%'}} />
+         <Divider sx={{width:'100%',bgcolor:"whitesmoke"}}/>
         
          <NavLink to='dashboard'
          className={({ isActive }) =>

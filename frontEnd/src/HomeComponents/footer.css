@@ -1,23 +1,43 @@
 .footer {
-    background: rgb(1, 101, 163);
-    background: linear-gradient(194deg, rgb(1, 13, 80) 39%, rgb(11, 63, 66) 100%);
+    /* background: rgb(1, 101, 163);
+    background: linear-gradient(194deg, rgb(1, 13, 80) 39%, rgb(11, 63, 66) 100%); */
     min-height: 200px;
+    background-color: #121212;
     display: flex;
     justify-content: space-around;
     align-items: center;
     color: white;
     flex-wrap: wrap;
-    padding: 2vmax;
-    grid-template-columns: 1fr 1fr 1fr;
+    padding: 2vmax 3vmax;
 }
 
 .centerFooter {
     font-size: 2em;
     text-align: center;
+    flex: 1;
+    flex-shrink: 0;
+}
+
+.leftFooter {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vmax;
+    margin-top: 2vmax;
+    flex: 1;
+    flex-shrink: 0;
 }
 
 .rightFooter {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+    flex: 1;
+    align-items: flex-end;
+    flex-shrink: 0;
+}
+
+.narendraPic_footer {
+    width: 150px;
+    background-color: rgb(245, 202, 12);
+    border-radius: 50%;
 }
