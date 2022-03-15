@@ -17,7 +17,7 @@ export default function Dashboard() {
   const [totalProducts, settotalProducts] = useState(5);
   const alert = useAlert();
  
-console.log(outofStock.length,outofStock);
+
   // outof stock chart
  const outofstockChartState = {
   
@@ -34,18 +34,26 @@ console.log(outofStock.length,outofStock);
 useEffect(async() => {
  await api.get('/api/v3/orders/allOrders').then((res) =>{
     settotalSale(res.data.totalAmount);
+ }).catch((e)=>{
+   alert.error(e.response.data.message || "something went wrong")
  })
  await api.get('/api/v2/users/admin/allUsers').then((res)=> {
       settotalUsers(res.data.Users.length);
      
- })
+ }).catch((e)=>{
+  alert.error(e.response.data.message || "something went wrong")
+})
  await api.get('api/v1/products/outofstock').then((res)=>{
 
    setoutofStock(res.data.products);
- })
+ }).catch((e)=>{
+  alert.error(e.response.data.message || "something went wrong")
+})
  await api.get('/api/v1/products').then((res)=>{
    settotalProducts(res.data.productCount)
-   })
+   }).catch((e)=>{
+    alert.error(e.response.data.message || "something went wrong")
+  })
 
   setloading(false)
 }, [])
