@@ -22,7 +22,7 @@ export default function Header() {
   useEffect(() => { 
   
    if(cookies.token){
-     console.log("im header if",userState);
+    
      api.get('/api/v2/users/profile').then((res)=>{
     
        dispatch(LoggedIn(res.data.user));
