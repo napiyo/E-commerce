@@ -35,24 +35,27 @@ useEffect(async() => {
  await api.get('/api/v3/orders/allOrders').then((res) =>{
     settotalSale(res.data.totalAmount);
  }).catch((e)=>{
-   alert.error(e.response.data.message || "something went wrong")
+   (e.response)?alert.error(e.response.data.message):alert.error("something went wrong")
  })
  await api.get('/api/v2/users/admin/allUsers').then((res)=> {
       settotalUsers(res.data.Users.length);
      
  }).catch((e)=>{
-  alert.error(e.response.data.message || "something went wrong")
+  (e.response)?alert.error(e.response.data.message):alert.error("something went wrong")
+
 })
  await api.get('api/v1/products/outofstock').then((res)=>{
 
    setoutofStock(res.data.products);
  }).catch((e)=>{
-  alert.error(e.response.data.message || "something went wrong")
+  (e.response)?alert.error(e.response.data.message):alert.error("something went wrong")
+
 })
  await api.get('/api/v1/products').then((res)=>{
    settotalProducts(res.data.productCount)
    }).catch((e)=>{
-    alert.error(e.response.data.message || "something went wrong")
+    (e.response)?alert.error(e.response.data.message):alert.error("something went wrong")
+
   })
 
   setloading(false)
@@ -92,7 +95,7 @@ return (
       <div>pending orders</div>
     </div>
     <Divider />
-      {(outofStock.length==0)?"no items here":
+      {(!outofStock || outofStock.length==0)?"no items here":
         
         outofStock.slice(0,10).map((item)=>{
           return<>

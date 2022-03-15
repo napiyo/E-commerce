@@ -31,7 +31,7 @@ export default function Profile() {
 
   const logout = () => {
     api
-      .post("http://localhost:4500/api/v2/users/logout")
+      .post("/api/v2/users/logout")
       .then(() => {
         dispatch(logOut());
         alert.success("log out succesfully")

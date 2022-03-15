@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 4100;
 
 
 const server = app.listen(PORT,()=>{
-    console.log(`server running on ${process.env.endPoint}:${PORT}`);
+    console.log(`server running on ${process.env.endPoint}:${PORT} in ${process.env.SITE_MODE} MODE`);
 })
 
  // unhandled promise Rejection
