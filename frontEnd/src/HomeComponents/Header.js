@@ -26,7 +26,7 @@ export default function Header() {
        dispatch(LoggedIn(res.data.user));
 
      }).catch((e)=>{
-      alert.error(e.response.data.message || "something went wrong")
+      (e.response)?alert.error(e.response.data.message):alert.error("something went wrong")
       //  dispatch(logOut());
      })
      
