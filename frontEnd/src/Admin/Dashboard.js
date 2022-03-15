@@ -17,7 +17,7 @@ export default function Dashboard() {
   const [totalProducts, settotalProducts] = useState(5);
   const alert = useAlert();
  
-
+console.log(outofStock.length,outofStock);
   // outof stock chart
  const outofstockChartState = {
   

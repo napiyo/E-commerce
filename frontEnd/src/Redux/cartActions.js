@@ -4,7 +4,7 @@ export const addToCartReduxAction = (product) => {
         payload:{
             id:product._id,
             productName:product.name,
-            productImage:product.images[0],
+            productImage:product.images,
             price:product.price,
             stock:product.stock
         }
@@ -17,7 +17,7 @@ export const decFromCartReduxAction= (product) => {
         payload:{
             id:product._id,
             productName:product.name,
-            productImage:product.images[0],
+            productImage:product.images,
             price:product.price,
             stock:product.stock
         }
@@ -31,7 +31,7 @@ export const delFromCartReduxAction= (product) => {
         payload:{
             id:product._id,
             productName:product.name,
-            productImage:product.images[0],
+            productImage:product.images,
             price:product.price,
             stock:product.stock
         }

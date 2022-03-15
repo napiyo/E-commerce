@@ -92,8 +92,15 @@ export default function Header() {
               Cart
             </div>
           </Link>
+          
         </div>
-      </div>
+      
+        </div>
+        <div>
+          
+        </div>
+   
+      
     </>
   );
 }

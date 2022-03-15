@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
@@ -16,7 +16,7 @@ import Cart from './screens/Cart';
 import Profile from './screens/Profile';
 import AdminPanel from './Admin/AdminPanel';
 import Auth from './screens/auth';
-import {Provider} from 'react-redux'
+import {Provider, useSelector} from 'react-redux'
 import store from './Redux/store';
 import {CookiesProvider} from 'react-cookie'
 import SearchPage from './screens/searchPage';
@@ -39,6 +39,7 @@ const options = {
   transition: transitions.SCALE,
   
 }
+
 ReactDOM.render(
 
      <AlertProvider template={AlertTemplate} {...options}>
@@ -46,6 +47,7 @@ ReactDOM.render(
      <Provider store={store} >
      <CookiesProvider>
   <Header/>
+  
   <Routes>
     <Route path="/product/:id" element={<Product />} />
     <Route path="/products/:category" element={<AllProducts />} />
@@ -78,7 +80,3 @@ ReactDOM.render(
 ,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

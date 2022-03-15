@@ -22,7 +22,7 @@ export default function CartSingleItem({product}) {
         <div className="cartItemDeleteBtn" onClick={()=>
           dispatch(delFromCartReduxAction(productCopy))
         }><img src="https://img.icons8.com/fluency/28/000000/filled-trash.png"/></div>
-      <img className="imageCartSingleItem" src={bookCover} alt="loading" />
+      <img className="imageCartSingleItem" src={product.productImage[0].public_url} alt="loading" />
       <div className="CartSingleItemDetailsContainer">
         <div className="TitleItemCartSingleItem">{product.productName}</div>
         <div className="cartSingleCartPriceAndQuantityContainer">

@@ -4,7 +4,7 @@ import bookCover from '../assests/bookCover.jpg';
 import {Link, useNavigate} from 'react-router-dom';
 import { Rating } from '@mui/material';
 import {useDispatch} from 'react-redux'
-import {addToCartReduxAction} from '../Redux/cartActions'
+import {addToCartReduxAction, emptyCart} from '../Redux/cartActions'
 import { useAlert } from 'react-alert';
 export default function BookBox({product}) {
 
@@ -36,7 +36,12 @@ navigate('/product/'+product._id);
             {product.price} ₹
         </div>
         <div className="actionBtns">
-            <button className='buyBtn'><img className='buyNowIcon' src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-buy-ecommerce-kiranshastry-gradient-kiranshastry-1.png"
+            <button className='buyBtn' onClick={()=>{
+              dispatch(emptyCart());
+              dispatch(addToCartReduxAction(product))
+              navigate('checkout')
+            }}>
+              <img className='buyNowIcon' src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-buy-ecommerce-kiranshastry-gradient-kiranshastry-1.png"
             alt="loading"/>Buy Now</button>
             <button className='addToCartBtn' onClick={()=>{
               alert.success("item added or quantity increased in your cart")

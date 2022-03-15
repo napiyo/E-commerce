@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import CartSingleItem from '../CartComponents/CartSingleItem';
 import {useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
+import { useAlert } from 'react-alert';
 
 export default function Cart() {
   const [cartPrice, setcartPrice] = useState(0);
@@ -15,6 +16,8 @@ export default function Cart() {
     setcartPrice(totalCartPrice);
   }, [cartState])
   
+
+ 
   return (
     <>
         <h3 className='heading'>My Cart</h3>

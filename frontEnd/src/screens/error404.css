@@ -1,9 +1,14 @@
 .body404 {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     min-height: 90vh;
     min-width: 100vw;
     flex-direction: column;
     column-gap: 1vmax;
+    font-size: 3rem;
+}
+
+.errorlogoImg {
+    height: 70vh;
 }

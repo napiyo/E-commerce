@@ -21,6 +21,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import MybackDrop from "../utils/backDrop";
+
 export default function Products() {
   const [products, setproducts] = useState([]);
   const [categories, setcategories] = useState([]);
@@ -122,6 +123,19 @@ export default function Products() {
     useState(false);
   const [uploading, setuploading] = useState(false);
 
+
+
+
+// options to show uploaded photo %
+const [dataUploadedPercentage, setdataUploadedPercentage] = useState(0)
+const uploadImgStatus = {
+  onUploadProgress:(progressEvent)=>{
+    const {loaded,total} = progressEvent;
+    let percentageUploaded =Math.floor(loaded*100 /total);
+    setdataUploadedPercentage(percentageUploaded);
+  }
+}
+
   const createNewProduct = async () => {
     // check for empty field
 
@@ -150,7 +164,7 @@ export default function Products() {
     formdata.append("file", newproductImage);
     formdata.append("upload_preset", "bookiasProduct");
     await axios
-      .post("https://api.cloudinary.com/v1_1/bookias/image/upload", formdata)
+      .post("https://api.cloudinary.com/v1_1/bookias/image/upload", formdata,uploadImgStatus)
       .then((resImage) => {
         // upload data to our server
         api
@@ -178,6 +192,7 @@ export default function Products() {
         console.log(e.message);
       });
     setuploading(false);
+    setdataUploadedPercentage(0);
   };
 
 
@@ -220,7 +235,7 @@ const editProduct=async()=>{
     formdata.append("file", newproductImage);
     formdata.append("upload_preset", "bookiasProduct");
 
-    await axios.post("https://api.cloudinary.com/v1_1/bookias/image/upload", formdata)
+    await axios.post("https://api.cloudinary.com/v1_1/bookias/image/upload", formdata,uploadImgStatus)
       .then((resImage) => {
          api.put(`/api/v1/products/updateProduct/${productTobeEdited}`,{name,author,description,category,price,Stock,
           "images":[{public_id:resImage.data.public_id,public_url:resImage.data.url}]}).then((resUpdated)=>{
@@ -243,6 +258,7 @@ const editProduct=async()=>{
   setStock(0);
   setnewproductImage(null);
    setuploading(false)
+   setdataUploadedPercentage(0)
 }
 
   return (
@@ -385,7 +401,7 @@ const editProduct=async()=>{
           </div>
         </DialogContent>
 
-        <MybackDrop open={uploading} />
+        <MybackDrop open={uploading} percentage={dataUploadedPercentage}/>
       </Dialog>
     </div>
   );
