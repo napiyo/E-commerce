@@ -21,5 +21,7 @@ for admin Login -- please DM me for credential.
 * admin can manage all user, delete user, change Role
 * admin panel has order page. where he can see all orders and update order status or cancel order
 * products , admin can add new products or update products, add stocks
- 
+#
+* FrontEnd (ReactJS) and BackEnd is maintained  separately
 
+# TO run this repo in your local server
