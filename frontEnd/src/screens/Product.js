@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import bookCover from '../assests/bookCover.jpg'
 import './product.css';
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Rating, Snackbar, TextField} from '@mui/material';
@@ -8,7 +7,6 @@ import { addToCartReduxAction, emptyCart } from '../Redux/cartActions';
 import api from '../config/axiosApi';
 import Review from '../allproductsListComponents/review';
 // import {queryString} from 'querystring'
-import {stringify} from 'query-string'
 import MyBackDrop from '../utils/backDrop';
 import { useAlert } from 'react-alert';
 
@@ -25,7 +23,7 @@ export default function Product() {
    const alert = useAlert();
 
   // write user review
-  const [dialogOpen, setdialogOpen] = useState(false)
+  const [dialogOpen, setdialogOpen] = useState(false);
  const [rattingByuser, setrattingByuser] = useState(0);
  const [productReviewByUser, setproductReviewByUser] = useState("")
 
@@ -51,10 +49,7 @@ const writeReview = ()=>{
     }).catch((err)=>{
       // handleDialog();
       setprocessing(false);
-      alert.error(err.response.data.message || "something went wrong");
-      
-     
-      
+      alert.error(err.response.data.message || "something went wrong"); 
     })
     setreviewUpdated(false);
 }
@@ -81,9 +76,6 @@ const addtoCart =()=>{
    dispatch(addToCartReduxAction(product));
    alert.success("product added or increased quantity to your cart")
 }
-
-
-
 
    if(loading){
     return <>
@@ -166,7 +158,7 @@ const addtoCart =()=>{
       <Divider />
       {
         product.reviews.map((r)=>{
-          return <Review id={r.userId} review={r} />
+          return <Review id={r.userId} review={r} productId={productId} setreviewUpdated={setreviewUpdated} reviewUpdated={reviewUpdated} />
         })
       }
     </div>

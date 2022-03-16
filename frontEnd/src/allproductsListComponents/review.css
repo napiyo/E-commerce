@@ -13,3 +13,8 @@
     background-color: aliceblue;
     margin-bottom: 1vmax;
 }
+
+.upperSingleReviewContainer {
+    display: flex;
+    justify-content: space-between;
+}

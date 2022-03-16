@@ -160,12 +160,12 @@ exports.addReview = catchAsyncError(async(req,res,next)=>{
 // delete a review
 exports.deleteReview = catchAsyncError(async(req,res,next)=>{
       
+    
         // find product
         const product = await productModel.findById(req.params.id);
         if(!product){
             return next(new ErrorHandler("product not found",404));
         }
-      
         const reviewUserId = req.body.reviewUserId;
         // remove review
         const reviewToDelete = product.reviews.find((review) => review.userId.toString() === reviewUserId.toString() );

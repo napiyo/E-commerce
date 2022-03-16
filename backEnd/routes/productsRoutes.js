@@ -9,7 +9,8 @@ router.route('/topSellingProducts/:count').get(getTopSellingProducts)
 router.route('/addProduct').post(isAuthenticated,authorizedRoles("admin"),createProduct);
 router.route('/updateProduct/:id').put(isAuthenticated,authorizedRoles("admin"),updateProduct)
 .delete(isAuthenticated,authorizedRoles("admin"),DeleteProduct);
-router.route('/addReview/:id').post(isAuthenticated,addReview).delete(isAuthenticated,authorizedRoles("admin"),deleteReview);
+router.route('/addReview/:id').post(isAuthenticated,addReview);
+router.route('/deleteReview/:id').post(isAuthenticated,authorizedRoles("admin"),deleteReview);
 router.route('/allCategories').get(getAllCategories);
 router.route('/outofstock').get(getOutOfStockProducts);
 router.route('/:id').get(getSingleProduct)
