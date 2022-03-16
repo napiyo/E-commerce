@@ -136,7 +136,7 @@ function paymentSuccessfull(response){
      },
      'price':cartPrice
    }
-   api.post('http://localhost:4500/api/v3/orders/newOrder',orderSummary).then((res)=>{
+   api.post('/api/v3/orders/newOrder',orderSummary).then((res)=>{
      alert.success("order placed")
    }).catch((e)=>{
      alert.error(e);
