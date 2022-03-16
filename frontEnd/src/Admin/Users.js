@@ -62,7 +62,7 @@ const updateUser = ()=>{
          const users = res.data.Users;
          const allrows  = [];
          users.map((item)=>{
-             allrows.push({id:item._id,'name':item.name,'email':item.email,'role':item.role,});
+             allrows.push({id:item._id,'userId':item._id,'name':item.name,'email':item.email,'role':item.role,});
          })
          setrows([...allrows])
 setloading(false)
@@ -72,6 +72,7 @@ setloading(false)
     const column =[
         { field: 'name', headerName: 'Name', width: 300 },
         { field: 'email', headerName: 'Email', width: 300,flex:1 },
+        { field: 'userId', headerName: 'user ID', width: 300,flex:1 },
         { field: 'role', headerName: 'Role', width: 150},
           {
             field: "actions",
