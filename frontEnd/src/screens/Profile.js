@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./profile.css";
 import { Avatar, Button, Divider, Skeleton, TextField } from "@mui/material";
+import {ManageAccounts,History, AdminPanelSettings, Logout} from '@mui/icons-material'
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../Redux/UserActions";
 import api from "../config/axiosApi";
@@ -65,20 +66,20 @@ export default function Profile() {
               isActive ? 'currentSectionTitleProfile leftSectionbottomItem ' : "leftSectionbottomItem "
             }
           > 
-            My Personal Details
+           <ManageAccounts /> My Personal Details
       
           </NavLink> 
           <Divider />
           <NavLink to={'./myorders'} className={({ isActive }) =>
             isActive ? 'currentSectionTitleProfile leftSectionbottomItem ' : "leftSectionbottomItem "
-            }>My orders
+            }> <History /> My orders
          </NavLink>
           <Divider />
-         {(user.role==='admin')? <Link to='/admin/dashboard' className="leftSectionbottomItem">Admin Dashboard</Link>
+         {(user.role==='admin')? <Link to='/admin/dashboard' className="leftSectionbottomItem"> <AdminPanelSettings /> Admin Dashboard</Link>
         :"" 
         }
-          <Button variant="contained" onClick={logout} sx={{width:'100%',marginTop:"1vmax"}}>
-            Log out
+          <Button variant="contained"  startIcon={<Logout />} onClick={logout} sx={{width:'100%',marginTop:"1vmax"}}>
+     Log out
           </Button>
         </div>
       </div>

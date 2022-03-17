@@ -4,6 +4,7 @@ import {NavLink, Outlet, useNavigate} from 'react-router-dom'
 import  {Divider} from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
+import {Dashboard,SupervisedUserCircle,ShoppingCartCheckout,Inventory} from '@mui/icons-material'
 export default function AdminPanel() {
   const user = useSelector((state)=>state.UserReducer);
   const navigate = useNavigate();
@@ -26,22 +27,22 @@ export default function AdminPanel() {
          className={({ isActive }) =>
          isActive ? 'currentSectionTitleProfile leftSectionbottomItem ' : "leftSectionbottomItem "
        }
-         > DashBoard</NavLink>
+         > <Dashboard /> DashBoard</NavLink>
          <NavLink to='users' 
          className={({ isActive }) =>
          isActive ? 'currentSectionTitleProfile leftSectionbottomItem ' : "leftSectionbottomItem "
        }
-         > Users</NavLink>
+         > <SupervisedUserCircle />Users</NavLink>
          <NavLink to='orders' 
          className={({ isActive }) =>
          isActive ? 'currentSectionTitleProfile leftSectionbottomItem ' : "leftSectionbottomItem "
        }
-         > orders</NavLink>
+         > <ShoppingCartCheckout /> orders</NavLink>
          <NavLink to='products' 
          className={({ isActive }) =>
          isActive ? 'currentSectionTitleProfile leftSectionbottomItem ' : "leftSectionbottomItem "
        }
-         > Products</NavLink> 
+         ><Inventory /> Products</NavLink> 
         
          
         

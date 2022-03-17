@@ -59,6 +59,10 @@
     text-align: center;
     padding: 1vmax;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    column-gap: 1vmax;
 }
 
 .leftSectionbottomItem:hover {
