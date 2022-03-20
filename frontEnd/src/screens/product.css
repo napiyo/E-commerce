@@ -85,6 +85,7 @@ tr:nth-child(2n+1) {
     border: 1px solid rgba(121, 121, 121, 0.664);
     padding: 20px;
     margin-top: 20px;
+    font-size: 0.9rem;
     padding-top: 0;
 }
 

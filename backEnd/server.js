@@ -12,7 +12,7 @@ const dotenv = require('dotenv');
    
 });
 
-if( process.env.SITE_MODE !=="DEVELOPMENT" ){
+if(process.env.SITE_MODE !=="PRODUCTION" ){
     
     dotenv.config({path:'./config/config.env'})
 }
@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 4100;
 
 
 const server = app.listen(PORT,()=>{
-    console.log(`server running on ${process.env.endPoint}:${PORT} in ${process.env.SITE_MODE} MODE`);
+    console.log(`server running on ${process.env.endPoint}:${PORT} in ${process.env.SITE_MODE || "DEVELOPMENT"} MODE`);
 })
 
  // unhandled promise Rejection

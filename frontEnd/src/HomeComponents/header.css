@@ -8,7 +8,7 @@
     padding: 7px;
     background-color: #F6F6F6;
     border-bottom: #7e7e7e solid 1px;
-    z-index: 2;
+    z-index: 3;
 }
 
 .searchBox {
@@ -69,25 +69,139 @@
     color: white;
 }
 
-
-/* .headerCardIcon {
-    position: relative;
-}
-
-.headerCardIcon::after {
-    content: " ";
-    border-radius: 50%;
-    background-color: #0078D4;
-    position: absolute;
-    right: 0;
-    width: 8px;
-    height: 8px;
-    top: -5px;
-    font-size: 10px;
-    padding: 2px;
-    color: white
-} */
-
 .headerProfile {
     cursor: pointer;
+}
+
+.burgerIcon {
+    position: relative;
+    display: none;
+    cursor: pointer;
+    width: 2rem;
+    height: 1rem;
+    border: none;
+    outline: none;
+    opacity: 0;
+    visibility: hidden;
+    background: none;
+    transform: rotate(0deg);
+    transition: 0.35s ease-in-out;
+    margin-top: 0.6rem;
+    user-select: none;
+}
+
+.burgerLine {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    left: 0;
+    border: none;
+    outline: none;
+    opacity: 1;
+    border-radius: 0.25rem;
+    background: rgb(54, 51, 51);
+    transform: rotate(0deg);
+    transition: 0.25s ease-in-out;
+}
+
+.burgerLine:nth-child(1) {
+    top: 0;
+}
+
+.burgerLine:nth-child(2),
+.burgerLine:nth-child(3) {
+    top: 0.5rem;
+}
+
+.burgerLine:nth-child(4) {
+    top: 1rem;
+}
+
+.burgerIconActive>div:nth-child(1),
+.burgerIconActive>div:nth-child(4) {
+    width: 0%;
+}
+
+
+/* .burgerIconActive>div:nth-child(4) {
+    display: none;
+} */
+
+.burgerIconActive>div:nth-child(2) {
+    transform: rotate(45deg);
+}
+
+.burgerIconActive>div:nth-child(3) {
+    transform: rotate(-45deg);
+}
+
+.mobileMenu {
+    display: none;
+}
+
+.mobileMenu {
+    opacity: 0;
+    background-color: #b3a8a8f1;
+    padding: 0 2rem;
+    /* display: flex; */
+    flex-direction: column;
+    z-index: 2;
+    height: 92vh;
+    color: white;
+    width: 100vw;
+    justify-content: center;
+    align-items: flex-start;
+    row-gap: 0.5rem;
+    font-size: larger;
+    font-weight: 500;
+    /* padding: 1rem; */
+    transform: translateX(-200vw);
+    position: fixed;
+    transition: 0.45s ease-in-out;
+    display: flex;
+    /* opacity: 1; */
+}
+
+.mobileMenuActive {
+    transform: translateX(0);
+    transition: 0.25s ease-in-out;
+}
+
+.mobileHeader_LOGO {
+    font-size: 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+    .burgerIcon {
+        opacity: 1;
+        visibility: visible;
+        display: inline-block;
+    }
+    .searchBox {
+        display: none;
+    }
+    .headerProfile {
+        display: none;
+    }
+    #userLogo {
+        display: none;
+    }
+    #loginSignupBtnHeader {
+        display: none;
+    }
+    .headerLogo {
+        display: none;
+    }
+    .header {
+        justify-content: space-between;
+        column-gap: 0;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .mobileMenuActive {
+        opacity: 1;
+        /* top: 0%; */
+        /* transform: translate(0); */
+    }
 }

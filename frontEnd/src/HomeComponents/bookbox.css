@@ -4,6 +4,7 @@
     background: rgb(153, 216, 255);
     background: linear-gradient(193deg, rgba(153, 216, 255, 1) 39%, rgba(0, 212, 255, 0.9839286056219363) 100%);
     margin: 20px 20px;
+    margin-top: 0;
     border-radius: 10px;
     display: flex;
     align-items: center;

@@ -65,7 +65,7 @@ export default function Products() {
           : alert.error("something went wrong");
       });
   };
-
+ 
   const column = [
     { field: "name", headerName: "Name", flex: 1 },
     { field: "price", headerName: "Price", width: 100 },
@@ -92,7 +92,7 @@ export default function Products() {
     },
   ];
 
-  // add new product dialoge
+  //  dialoge
 
   const [openDialog, setopenDialog] = useState(false);
   const handleDialog = () => {
@@ -107,10 +107,12 @@ export default function Products() {
     }
     setopenDialog(!openDialog);
   };
-
+ 
   // product image
   const [newproductImage, setnewproductImage] = useState(null);
+
   const [DialogType, setDialogType] = useState("addProduct");
+  
   // const [newProductDetails, setnewProductDetails] = useState({});
   const [name, setname] = useState("");
   const [author, setauthor] = useState("");
@@ -279,7 +281,8 @@ const editProduct=async()=>{
       {/* edit product  */}
 
       {/* new product dialog */}
-      <Dialog open={openDialog} onClose={handleDialog} fullScreen>
+      <Dialog fullScreen open={openDialog} onClose={handleDialog} 
+      >
         <AppBar sx={{ position: "relative" }}>
           <Toolbar>
             <IconButton
