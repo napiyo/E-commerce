@@ -24,4 +24,56 @@ for admin Login -- please DM me for credential.
 #
 * FrontEnd (ReactJS) and BackEnd is maintained  separately
 
-# TO run this repo in your local server
+# To run this repo in your local server [development mode]
+> clone this repo to your local machine (download this folder)
+```
+cd clone https://github.com/napiyo/bookias-online-Book-Store.git
+```
+> make sure you have git - if dont search on google - "git". paste this above code gitbash only
+* now you'll to add some configuration
+### # create config.env file inside backEnd > config folder 
+add these config into that config.env
+* PORT = 4500
+* endPoint = http://localhost 
+* dbURL =```MONGODB URL```
+* JWT_SECRET =```RANDOM JWT SECRET KEY```
+* JWT_EXPIRES_IN = 5d
+* COOKIE_EXPIRE = 5
+* RESET_PASSWORD_TOKEN_EXPIRES=15
+* SMPT_SERVICE= "gmail"
+* SMPT_MAIL=```YOUR GMAIL EMAIL TO SEND FORGOT PASSWORD MAILS```
+* SMPT_PASSWORD=```YOUR GAMIL PASSWORD```
+* SMPT_HOST=smtp.gmail.com
+* SMPT_PORT=465
+* SITE_MODE=DEVELOPMENT
+
+### # CREATE .env file insite frontEnd
+add these config into .env file
+* REACT_APP_API_BASE_URL = `your api base url`
+* REACT_APP_RAZORPAY_KEY = ```razor pay key```
+
+### lets run this app in dev mode - {frontEnd and backEnd Hosted on diff ports}
+> open terminal inside this cloned folder
+```
+npm i
+```
+```
+cd backEnd
+```
+```
+npm i
+```
+
+```
+npm run dev
+```
+> open new terminal - keep above terminal running
+```
+cd frontEnd
+```
+```
+npm i
+```
+```
+npm start
+```
