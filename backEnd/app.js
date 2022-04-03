@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 // app.use(cors())
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+// app.use(cors({credentials: true, origin: ''}));
 app.use('/api/v1/products',productRouter);
 app.use('/api/v2/users',userRouter);
 app.use('/api/v3/orders',orderRouter);
