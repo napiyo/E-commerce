@@ -1,0 +1,27 @@
+{
+    "version": 2,
+    "builds": [{
+            "src": "frontEnd/**",
+            "use": "@vercel/static-build",
+            "config": { "distDir": "frontEnd/build" }
+        },
+        {
+            "src": "backEnd/**",
+            "use": "@vercel/node"
+        }
+    ],
+    "functions": {
+        "api/**/*.js": {
+            "runtime": "@vercel/node"
+        }
+    },
+    "hooks": {
+        "build": {
+            "before": [
+                "npm install --prefix frontEnd",
+                "npm run build --prefix frontEnd",
+                "npm install --prefix backEnd"
+            ]
+        }
+    }
+}
