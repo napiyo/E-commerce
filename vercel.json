@@ -7,12 +7,16 @@
         },
         {
             "src": "backEnd/**",
-            "use": "@vercel/node"
+            "use": "@vercel/node",
+            "config": {
+                "maxDuration": 300,
+                "buildCommand": "npm run vercel-build",
+                "output": "dist"
+            }
         }
     ],
-    "functions": {
-        "api/**/*.js": {
-            "runtime": "@vercel/node"
-        }
-    }
+    "routes": [
+        { "src": "/api/(.*)", "dest": "backEnd/$1" },
+        { "src": "/(.*)", "dest": "frontEnd/$1" }
+    ]
 }
