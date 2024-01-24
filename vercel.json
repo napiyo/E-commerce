@@ -14,14 +14,5 @@
         "api/**/*.js": {
             "runtime": "@vercel/node"
         }
-    },
-    "hooks": {
-        "build": {
-            "before": [
-                "npm install --prefix frontEnd",
-                "npm run build --prefix frontEnd",
-                "npm install --prefix backEnd"
-            ]
-        }
     }
 }

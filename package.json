@@ -8,7 +8,8 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node ./backEnd/server.js"
+        "start": "node ./backEnd/server.js",
+        "vercel-build": "npm install --prefix frontEnd && npm run build --prefix frontEnd && npm install --prefix backEnd"
     },
     "repository": {
         "type": "git",
