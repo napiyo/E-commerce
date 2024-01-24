@@ -2,7 +2,7 @@
     "name": "mern-ecommerce",
     "version": "1.0.0",
     "engines": {
-        "node": "16.4.2"
+        "node": "20.11.0"
     },
     "description": "",
     "main": "index.js",
@@ -20,5 +20,8 @@
     "bugs": {
         "url": "https://github.com/napiyo/E-commerce/issues"
     },
-    "homepage": "https://github.com/napiyo/E-commerce#readme"
+    "homepage": "https://github.com/napiyo/E-commerce#readme",
+    "dependencies": {
+        "express": "^4.18.2"
+    }
 }
