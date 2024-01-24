@@ -1,0 +1,29 @@
+# This is an example webapp.io configuration for NodeJS
+FROM vm/ubuntu:18.04
+# To note: Layerfiles create VMs, *not* containers!
+
+# Install node 20.11.0
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash && \
+    apt install nodejs && \
+    rm -f /etc/apt/sources.list.d/nodesource.list
+
+# Install http-server globally
+RUN npm install -g http-server
+
+# Copy application files to the VM
+COPY . .
+
+# Create a simple hello.html file
+# RUN echo 'hello' > hello.html
+
+# Install dependencies and build frontEnd
+RUN npm install --prefix frontEnd && npm run build --prefix frontEnd
+
+# Install dependencies in backEnd
+RUN npm install --prefix backEnd
+
+# Start the server in the background on port 8000
+RUN BACKGROUND npm start
+
+# Expose the website on http://localhost:8000
+EXPOSE WEBSITE http://localhost:8000
