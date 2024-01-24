@@ -2,6 +2,7 @@ const app = require('./app.js');
 const connectDatabase = require('./config/database.js');
 const dotenv = require('dotenv');
 
+dotenv.config({path:'./config/config.env'});
 
  // Handling uncaught Exception
  process.on("uncaughtException",(err) =>{
@@ -12,10 +13,10 @@ const dotenv = require('dotenv');
    
 });
 
-if(process.env.SITE_MODE !=="PRODUCTION" ){
+// if(process.env.SITE_MODE !=="PRODUCTION" ){
     
-    dotenv.config({path:'./config/config.env'})
-}
+    // dotenv.config({path:'./config/config.env'})
+    // }
 
 connectDatabase();
 const PORT = process.env.PORT || 4100;

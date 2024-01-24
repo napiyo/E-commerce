@@ -11,6 +11,12 @@
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
+    transition: all 0.3s;
+}
+
+.SingleCategoryMain:hover {
+    transform: scale(0.9);
+    background-color: rgb(236, 157, 155);
 }
 
 .categoryName {
